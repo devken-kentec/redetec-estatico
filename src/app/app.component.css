@@ -1,0 +1,78 @@
+nav.orange {
+  background-color: #fff;
+  box-shadow: 0px 0px 20px #000;
+  height: 80px;
+  border-bottom-right-radius: 80px;
+  border-bottom-left-radius: 80px;
+}
+div.menu{
+  margin-left: 5px;
+  border:#FF8C00 1px solid;
+  width: 250px;
+  border-radius: 10px;
+  z-index: 2000;
+  position: fixed;
+  top: 83px;
+}
+
+div ul > li a:hover {
+  color: #FF8C00;
+  font-weight: bold;
+}
+
+div ul > li  a {
+    color: #000;
+}
+
+div.barra ul > li  a {
+  font-size: 12pt;
+  color: #000;
+  height: 24px;
+  font-weight: bold;
+}
+
+div.barra ul > li a:hover {
+  color: #FF8C00;;
+  font-weight: bold;
+}
+
+.border-orange {
+  border-color: #FF8C00 !important;
+}
+
+a.dropdown-item {
+    color: #000 !important;
+
+}
+
+img.hamburger {
+  width: 20px;
+  background-color:#FF8C00;
+}
+
+img.logo {
+  width: 40%;
+}
+
+h1.h3 {
+  text-shadow: .3px .3px .5px black;
+}
+
+#contatos {
+  font-size: 22pt;
+  padding-bottom: 20px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+div#contato {
+  background-color: #282727;
+  color: #FF8C00;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+
+
+
+
