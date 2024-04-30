@@ -16,9 +16,13 @@ export class RacaService {
     return this.http.get<RespostaRaca[]>(`${this.api}/listarRaca`);
   }
 
+  public loadById(id: number): Observable<RespostaRaca> {
+    return this.http.get<RespostaRaca>(`${this.api}/recuperar/${id}`)
+  }
+
   public save(raca: RequisicaoRaca):Observable<RespostaRaca> {
     if(raca.id){
-      return this.create(raca);
+      return this.update(raca);
     } else {
       return this.create(raca);
     }
@@ -26,5 +30,9 @@ export class RacaService {
 
   private create(raca: RequisicaoRaca): Observable<RespostaRaca>{
     return this.http.post<RespostaRaca>(`${this.api}`, raca);
+  }
+
+  private update(raca: RequisicaoRaca): Observable<RespostaRaca>{
+    return this.http.put<RespostaRaca>(`${this.api}`, raca);
   }
 }

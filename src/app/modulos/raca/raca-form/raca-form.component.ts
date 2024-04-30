@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RacaService } from '../shared/raca.service';
 import { RequisicaoRaca, RespostaRaca } from '../../../domain/raca.domain';
 import { take } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-raca-form',
@@ -23,7 +24,7 @@ import { environment } from '../../../../environments/environment.development';
 export class RacaFormComponent {
   private fb = inject(FormBuilder);
   private racaService = inject(RacaService);
-  public api = environment.api;
+  private route = inject(ActivatedRoute);
   racaForm: FormGroup;
   requisicao!: RequisicaoRaca;
 
@@ -34,6 +35,25 @@ export class RacaFormComponent {
       descricao: [''],
       status: ['']
     });
+    this.preencherFormulario();
+  }
+
+
+
+  public preencherFormulario(): void{
+    const routeParams = this.route.snapshot.params;
+    if(routeParams["id"] > 0){
+      this.racaService.loadById(routeParams["id"]).pipe(
+        take(1)
+      ).subscribe((res: RespostaRaca)=>{
+        console.log(res)
+        this.racaForm.patchValue({
+          id: res.id,
+          descricao: res.descricao,
+          status: res.status
+        });
+      });
+    }
   }
 
   public onSubmit(){
