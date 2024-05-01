@@ -35,4 +35,8 @@ export class RacaService {
   private update(raca: RequisicaoRaca): Observable<RespostaRaca>{
     return this.http.put<RespostaRaca>(`${this.api}`, raca);
   }
+
+  public delete(id: number): Observable<RespostaRaca> {
+    return this.http.patch<RespostaRaca>(`${this.api}/delete/${id}`, 'Inativo');
+  }
 }

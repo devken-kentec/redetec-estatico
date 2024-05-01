@@ -1,4 +1,4 @@
-<div class="col-md-12" style="margin-top: 120px;">
+<div class="col-md-12" style="margin-top: 180px;">
   <nav>
     <ol class="breadcrumb bg-white">
       <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
@@ -35,15 +35,25 @@
           <td>{{ lista.status }}</td>
           <td>
             <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
-            <button  data-toggle="modal" data-target="#ModalExclusao" class="btn btn-outline-danger btn-sm"><i class="fas fa-user-slash"></i></button>
+            @if(lista.id > 0){
+              <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
+            }
+
           </td>
         </tr>
       } @empty {
-        <div class="alert alert-info" role="alert">
-          Não contém valores
+        <div class="d-flex justify-content-center mt-3 ml-5">
+          <div class="alert alert-warning" style="width: 800px;" role="alert">
+            A lista de raças esta vazia!
+          </div>
         </div>
       }
       </tbody>
     </table>
   </div>
+    @if(racaRecupeada){
+      <div>
+        <app-modal-form [entrada]="racaRecupeada" (emitirEvento)="excluirRegistro($event)"/>
+      </div>
+    }
 </div>

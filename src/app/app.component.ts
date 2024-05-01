@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import  packageJson  from '../../package.json';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,11 @@ export class AppComponent {
 
   //Variaveis Locais
   contatoForm: FormGroup;
+  public appVersion!: string;
 
 
   constructor(){
+    this.appVersion = packageJson.version;
     this.contatoForm = this.fb.group({
       nome: ['', [Validators.required]],
       telefone: ['', [Validators.required]],

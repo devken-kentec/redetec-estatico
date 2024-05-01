@@ -5,7 +5,7 @@
           <img src="assets/hamburger.gif" alt="Menu" class="hamburger">
         </button>
           <a href="#" class="navbar-brand" class="logo">
-            <img src="assets/logo_new.jpg" alt="kasapet" class="logo">
+            <img src="assets/logo_new.png" alt="kasapet" width="60">
           </a>
       </div>
       <div class="col col-lg-9 col-xl-9 barra d-flex align-items-center justify-content-end">
@@ -48,8 +48,8 @@
     </li>
   </ul>
 </div>
-<div class="container" style="min-height: 480px;">
-  <router-outlet></router-outlet>
+<div class="container" style="min-height: 600px;">
+  <router-outlet/>
 </div>
 <div id="contato">
   <div class="container">
@@ -95,7 +95,7 @@
             <i class="fas fa-paper-plane"></i>&nbsp;Enviar
           </button>
 
-          {{ contatoForm.value | json }}
+          {{ appVersion }}
         </form>
       </div>
     </div>

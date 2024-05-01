@@ -38,8 +38,6 @@ export class RacaFormComponent {
     this.preencherFormulario();
   }
 
-
-
   public preencherFormulario(): void{
     const routeParams = this.route.snapshot.params;
     if(routeParams["id"] > 0){
