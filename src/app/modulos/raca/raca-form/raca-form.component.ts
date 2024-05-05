@@ -1,13 +1,13 @@
+
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RacaService } from '../shared/raca.service';
 import { RequisicaoRaca, RespostaRaca } from '../../../domain/raca.domain';
 import { take } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
 import { SharedService } from '../../shared/shared.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-raca-form',
@@ -16,7 +16,8 @@ import { SharedService } from '../../shared/shared.service';
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule,
+    ToastrModule],
   templateUrl: './raca-form.component.html',
   styleUrl: './raca-form.component.css',
   preserveWhitespaces: true
@@ -25,6 +26,7 @@ export class RacaFormComponent {
   private fb = inject(FormBuilder);
   private racaService = inject(RacaService);
   private route = inject(ActivatedRoute);
+  private sharedService = inject(SharedService);
   racaForm: FormGroup;
   requisicao!: RequisicaoRaca;
 
@@ -44,7 +46,6 @@ export class RacaFormComponent {
       this.racaService.loadById(routeParams["id"]).pipe(
         take(1)
       ).subscribe((res: RespostaRaca)=>{
-        console.log(res)
         this.racaForm.patchValue({
           id: res.id,
           descricao: res.descricao,
@@ -65,8 +66,14 @@ export class RacaFormComponent {
       this.racaService.save(this.requisicao).pipe(
         take(1)
       ).subscribe({
-          next: (res) => console.log(res),
-          error:(res) => console.log(res)
+          next: (res) => {
+            console.log(res);
+            this.sharedService.saveShow("Status Alterado!", "Sucesso!!");
+          },
+          error: (err) => {
+            console.log(err);
+            this.sharedService.warningShow("Ops! Algo Errado!!", "Verifique o Console!");
+          },
       });
     }
   }

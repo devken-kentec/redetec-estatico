@@ -4,13 +4,13 @@ import { RacaService } from '../shared/raca.service';
 import { RespostaRaca } from '../../../domain/raca.domain';
 import { SharedService } from '../../shared/shared.service';
 import { ModalFormComponent } from '../../modal/modal-form/modal-form.component';
-import { IShared } from '../../../domain/interface.domain';
 import { take } from 'rxjs';
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-raca-list',
   standalone: true,
-  imports: [RouterModule, ModalFormComponent],
+  imports: [RouterModule, ModalFormComponent, ToastrModule],
   templateUrl: './raca-list.component.html',
   styleUrl: './raca-list.component.css',
   preserveWhitespaces: true
@@ -19,6 +19,7 @@ export class RacaListComponent implements OnInit {
   private racaService = inject(RacaService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private sharedService = inject(SharedService);
 
   listaRacas: RespostaRaca[] = [];
   racaRecupeada!: RespostaRaca;
@@ -45,10 +46,16 @@ export class RacaListComponent implements OnInit {
   public excluirRegistro(id: number){
     this.racaService.delete(id)
     .pipe(take(1))
-    .subscribe((res: any)=>{
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.sharedService.saveShow("Status Alterado!", "Sucesso!!");
         this.listarRaca();
-      }
-    );
+      },
+      error: (err) => {
+        console.log(err);
+        this.sharedService.warningShow("Ops! Algo Errado!!", "Verifique o Console!")
+      },
+    });
   }
-
 }

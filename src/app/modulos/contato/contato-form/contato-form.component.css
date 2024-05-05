@@ -55,3 +55,22 @@ img.logo {
 h1.h3 {
   text-shadow: .3px .3px .5px black;
 }
+
+#contatos {
+  font-size: 22pt;
+  padding-bottom: 20px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+div#contato {
+  background-color: #282727;
+  color: #FF8C00;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+
+
+
+
