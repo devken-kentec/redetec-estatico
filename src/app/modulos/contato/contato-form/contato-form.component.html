@@ -1,0 +1,56 @@
+<div id="contato">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div id="rede">Nossas Redes Sociais</div>
+        <a href="https://www.facebook.com/cempreen.dedor.33/" target="_blank"><i class="fab fa-facebook" style="font-size: 30pt; color:#FF8C00;"></i></a>
+        <a href="https://www.facebook.com/casadoempreendedorgo" target="_blank"><i class="fab fa-facebook" style="font-size: 30pt; color:#FF8C00; margin-left: 10px;"></i></a>
+        <a href="https://www.instagram.com/empreendedor_go/" target="_blank"><i class="fab fa-instagram" style="font-size: 30pt; color:#FF8C00; margin-left: 10px;"></i></a>
+      </div>
+      <div class="col-12 col-md-6">
+        <div id="contatos">Contatos</div>
+        <div>
+          Fones:
+        </div>
+        <div class="mb-2">
+          <a href="tel:+6236099481" style="font-size: 15pt; color:#FF8C00;"><i class="fas fa-phone-alt"></i> (62) 3609-9481</a>
+        </div>
+        <div class="d-flex align-items-center">
+          <a href="https://wa.me/556236099481" style="margin-left: 7px; font-size: 15pt; color:#FF8C00;"><i class="fab fa-whatsapp" style="font-size: 15pt;  margin-left: 1px;"></i> (62) 3609-9481 </a>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 mt-4">
+        <div class="text-center mb-3">
+          <div style="font-size: 20pt; font-weight: bold;">Envie uma mensagem para nós</div>
+        </div>
+        <form [formGroup]="contatoForm">
+          <div class="form-row mt-2">
+            <div class="form-group col-12 col-md-3">
+              <input class="form-control" type="text" placeholder="Nome" formControlName="nome">
+            </div>
+            <div class="form-group col-12 col-md-3">
+              <input class="form-control" type="text" placeholder="Telefone" formControlName="telefone">
+            </div>
+            <div class="form-group col-12 col-md-3">
+              <input class="form-control" type="text" placeholder="Email" formControlName="email">
+            </div>
+            <div class="form-group col-12 col-md-3">
+              <input class="form-control" type="text" placeholder="Mensagem" formControlName="mensagem">
+            </div>
+          </div>
+          <button type="button" class="btn btn-success btn-block" >
+            <i class="fas fa-paper-plane"></i>&nbsp;Enviar
+          </button>
+        </form>
+      </div>
+    </div>
+    <div id="endereco" class="mt-5">
+      <div class="text-center">
+        Kasa Pet
+      </div>
+      <div class="text-center mb-3">
+        Rua João Marques Esquina com Rua Caturai
+    </div>
+    </div>
+  </div>
+</div>

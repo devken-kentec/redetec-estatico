@@ -1,12 +1,13 @@
+
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RacaService } from '../shared/raca.service';
 import { RequisicaoRaca, RespostaRaca } from '../../../domain/raca.domain';
 import { take } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
+import { SharedService } from '../../shared/shared.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-raca-form',
@@ -15,7 +16,8 @@ import { environment } from '../../../../environments/environment.development';
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule,
+    ToastrModule],
   templateUrl: './raca-form.component.html',
   styleUrl: './raca-form.component.css',
   preserveWhitespaces: true
@@ -23,7 +25,8 @@ import { environment } from '../../../../environments/environment.development';
 export class RacaFormComponent {
   private fb = inject(FormBuilder);
   private racaService = inject(RacaService);
-  public api = environment.api;
+  private route = inject(ActivatedRoute);
+  private sharedService = inject(SharedService);
   racaForm: FormGroup;
   requisicao!: RequisicaoRaca;
 
@@ -34,6 +37,22 @@ export class RacaFormComponent {
       descricao: [''],
       status: ['']
     });
+    this.preencherFormulario();
+  }
+
+  public preencherFormulario(): void{
+    const routeParams = this.route.snapshot.params;
+    if(routeParams["id"] > 0){
+      this.racaService.loadById(routeParams["id"]).pipe(
+        take(1)
+      ).subscribe((res: RespostaRaca)=>{
+        this.racaForm.patchValue({
+          id: res.id,
+          descricao: res.descricao,
+          status: res.status
+        });
+      });
+    }
   }
 
   public onSubmit(){
@@ -47,8 +66,14 @@ export class RacaFormComponent {
       this.racaService.save(this.requisicao).pipe(
         take(1)
       ).subscribe({
-          next: (res) => console.log(res),
-          error:(res) => console.log(res)
+          next: (res) => {
+            console.log(res);
+            this.sharedService.saveShow("Status Alterado!", "Sucesso!!");
+          },
+          error: (err) => {
+            console.log(err);
+            this.sharedService.warningShow("Ops! Algo Errado!!", "Verifique o Console!");
+          },
       });
     }
   }
