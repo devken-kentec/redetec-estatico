@@ -2,47 +2,42 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { HumanoService } from '../shared/humano.service';
+import { EmpresaService } from '../shared/empresa.service';
 import { SharedService } from '../../shared/shared.service';
-import { RequisicaoHumano, RespostaHumano } from '../../../domain/humano-domain';
+import { RequisicaoEmpresa, RespostaEmpresa } from '../../../domain/empresa.domain';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-humano-form',
+  selector: 'app-empresa-form',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
-  ],
-  templateUrl: './humano-form.component.html',
-  styleUrl: './humano-form.component.css',
+    FormsModule],
+  templateUrl: './empresa-form.component.html',
+  styleUrl: './empresa-form.component.css',
   preserveWhitespaces: true
 })
-export class HumanoFormComponent {
+export class EmpresaFormComponent {
   private fb = inject(FormBuilder);
-  private humanoService = inject(HumanoService);
+  private empresaService = inject(EmpresaService);
   private route = inject(ActivatedRoute);
   private sharedService = inject(SharedService);
 
-  humanoForm: FormGroup;
-  requisicao!: RequisicaoHumano;
+  empresaForm: FormGroup;
+  requisicao!: RequisicaoEmpresa;
 
   constructor(){
-    this.humanoForm= this.fb.group({
+    this.empresaForm= this.fb.group({
       id: [null],
-      nome: [''],
-      sobrenome: [''],
-      dataNascimento: [''],
+      nomeFantasia: [''],
       cep: [''],
       endereco: [''],
       complemento: [''],
-      fone: [''],
+      telefone: [''],
       whatsapp: [''],
-      status: [''],
-      email: [''],
-      empresa:['']
+      status: ['']
     });
     this.preencherFormulario();
   }
@@ -50,33 +45,28 @@ export class HumanoFormComponent {
   public preencherFormulario(): void{
     const routeParams = this.route.snapshot.params;
     if(routeParams["id"] > 0){
-      this.humanoService.loadById(routeParams["id"]).pipe(
+      this.empresaService.loadById(routeParams["id"]).pipe(
         take(1)
-      ).subscribe((res: RespostaHumano)=>{
-        this.humanoForm.patchValue(res);
+      ).subscribe((res: RespostaEmpresa)=>{
+        this.empresaForm.patchValue(res);
       });
     }
   }
 
   public onSubmit(){
-    let form = this.humanoForm;
-    form.get('empresa')?.setValue(1);
+    let form = this.empresaForm;
     this.requisicao = {
      id: form.get('id')?.value,
-     nome: form.get('nome')?.value,
-     sobrenome: form.get('sobrenome')?.value,
-     dataNascimento: form.get('dataNascimento')?.value,
+     nomeFantasia: form.get('nomeFantasia')?.value,
      cep: form.get('cep')?.value,
      endereco: form.get('endereco')?.value,
      complemento: form.get('complemento')?.value,
-     fone: form.get('fone')?.value,
+     telefone: form.get('telefone')?.value,
      whatsapp: form.get('whatsapp')?.value,
-     email: form.get('email')?.value,
-     status: form.get('status')?.value,
-     empresa: form.get('empresa')?.value,
+     status: form.get('status')?.value
     }
    if(form.valid){
-     this.humanoService.save(this.requisicao).pipe(
+     this.empresaService.save(this.requisicao).pipe(
        take(1)
      ).subscribe({
          next: (res) => {

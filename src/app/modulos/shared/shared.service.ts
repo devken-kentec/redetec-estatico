@@ -1,11 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment.development';
+import { Observable } from 'rxjs';
+import { ComboBoxRaca } from '../../domain/raca.domain';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
+  private readonly api = `${environment.api}/rede-tecnologia/api`;
+  private http = inject(HttpClient);
   private toastrService = inject(ToastrService);
 
   saveShow(mensagem: string, titulo: string){
@@ -18,6 +24,10 @@ export class SharedService {
 
   warningShow(mensagem: string, titulo: string){
     this.toastrService.warning(mensagem, titulo)
+  }
+
+  public comboBoxRaca(): Observable<ComboBoxRaca[]>{
+    return this.http.get<ComboBoxRaca[]>(`${this.api}/raca/v1/select`);
   }
 
 }

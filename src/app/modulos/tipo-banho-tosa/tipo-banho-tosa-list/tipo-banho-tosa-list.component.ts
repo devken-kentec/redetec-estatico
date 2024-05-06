@@ -1,36 +1,36 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ModalFormComponent } from '../../modal/modal-form/modal-form.component';
-import { HumanoService } from '../shared/humano.service';
+import { TipoBanhoTosaService } from '../shared/tipo-banho-tosa.service';
 import { SharedService } from '../../shared/shared.service';
-import { RespostaHumano } from '../../../domain/humano-domain';
+import { RespostaTipoBanhoTosa } from '../../../domain/tipo-banho-tosa.domain';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-humano-list',
+  selector: 'app-tipo-banho-tosa-list',
   standalone: true,
   imports: [RouterModule, ModalFormComponent],
-  templateUrl: './humano-list.component.html',
-  styleUrl: './humano-list.component.css',
+  templateUrl: './tipo-banho-tosa-list.component.html',
+  styleUrl: './tipo-banho-tosa-list.component.css',
   preserveWhitespaces: true
 })
-export class HumanoListComponent {
-  private humanoService = inject(HumanoService);
+export class TipoBanhoTosaListComponent implements OnInit {
+  private tipoBanhoTosaService = inject(TipoBanhoTosaService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private sharedService = inject(SharedService);
 
-  listaHumano: RespostaHumano[] = [];
-  humano!: RespostaHumano;
+  listaTipoBanhoTosa: RespostaTipoBanhoTosa[] = [];
+  tipoBanhoTosa!: RespostaTipoBanhoTosa;
   registroDeletado: boolean = true;
 
   ngOnInit(): void {
-    this.listarHumano();
+    this.listarTipoBanhoTosa();
   }
 
-  public listarHumano(){
-    this.humanoService.list().subscribe((res: RespostaHumano[])=>{
-        this.listaHumano = res
+  public listarTipoBanhoTosa(){
+    this.tipoBanhoTosaService.list().subscribe((res: RespostaTipoBanhoTosa[])=>{
+        this.listaTipoBanhoTosa = res
     });
   }
 
@@ -38,18 +38,18 @@ export class HumanoListComponent {
     this.router.navigate(["edit", id], { relativeTo: this.route });
   }
 
-  public recuperarDados(lista: RespostaHumano): RespostaHumano {
-    return this.humano = lista;
+  public recuperarDados(lista: RespostaTipoBanhoTosa): RespostaTipoBanhoTosa {
+    return this.tipoBanhoTosa = lista;
   }
 
   public excluirRegistro(id: number){
-    this.humanoService.delete(id)
+    this.tipoBanhoTosaService.delete(id)
     .pipe(take(1))
     .subscribe({
       next: (res) => {
         console.log(res);
         this.sharedService.saveShow("Status Alterado!", "Sucesso!!");
-        this.listarHumano();
+        this.listarTipoBanhoTosa();
       },
       error: (err) => {
         console.log(err);
