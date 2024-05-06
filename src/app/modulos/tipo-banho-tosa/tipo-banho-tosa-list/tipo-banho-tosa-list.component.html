@@ -8,12 +8,12 @@
   <div class="row mb-4">
     <div class="col-md">
       <h1 class="h5 border-left pl-2">
-        Listagem de Humanos
+        Listagem de Tipo de Banhos e Tosas
       </h1>
     </div>
     <div class="col-md">
       <button routerLink="new" class="btn btn-primary float-right">
-        <i class="fas fa-user-plus"></i> Cadastrar Humano
+        <i class="fas fa-user-plus"></i> Cadastrar Banho é Tosa
       </button>
     </div>
   </div>
@@ -22,22 +22,18 @@
       <thead>
         <tr class="bg-dark text-light">
           <th>ID</th>
-          <th>Nome</th>
-          <th>Sobrenome</th>
-          <th>Fone</th>
-          <th>Whatspp</th>
+          <th>Descrição</th>
+          <th>Valor</th>
           <th>Status</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        @for(lista of listaHumano; track lista.id; let i = $index){
+        @for(lista of listaTipoBanhoTosa; track lista.id; let i = $index){
         <tr>
           <td>{{ lista.id }}</td>
-          <td>{{ lista.nome }}</td>
-          <td>{{ lista.sobrenome}}</td>
-          <td>{{ lista.fone }}</td>
-          <td>{{ lista.whatsapp }}</td>
+          <td>{{ lista.descricao }}</td>
+          <td>{{ lista.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</td>
           <td>{{ lista.status }}</td>
           <td>
             <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
@@ -50,16 +46,16 @@
       } @empty {
         <div class="d-flex justify-content-center mt-3 ml-5">
           <div class="alert alert-warning" style="width: 800px;" role="alert">
-            A lista de Humanos esta vazia!
+            A lista de raças esta vazia!
           </div>
         </div>
       }
       </tbody>
     </table>
   </div>
-    @if(humano){
+    @if(tipoBanhoTosa){
       <div>
-        <app-modal-form [entrada]="humano" (emitirEvento)="excluirRegistro($event)"/>
+        <app-modal-form [entrada]="tipoBanhoTosa" (emitirEvento)="excluirRegistro($event)"/>
       </div>
     }
 </div>

@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { HumanoService } from '../shared/humano.service';
+import { AnimalService } from '../shared/animal.service';
 import { SharedService } from '../../shared/shared.service';
-import { RequisicaoHumano, RespostaHumano } from '../../../domain/humano-domain';
+import { RequisicaoAnimal, RespostaAnimal } from '../../../domain/animal.domain';
 import { take } from 'rxjs';
+import { ComboBoxRaca } from '../../../domain/raca.domain';
 
 @Component({
-  selector: 'app-humano-form',
+  selector: 'app-animal-form',
   standalone: true,
   imports: [
     RouterModule,
@@ -16,33 +17,36 @@ import { take } from 'rxjs';
     ReactiveFormsModule,
     FormsModule
   ],
-  templateUrl: './humano-form.component.html',
-  styleUrl: './humano-form.component.css',
+  templateUrl: './animal-form.component.html',
+  styleUrl: './animal-form.component.css',
   preserveWhitespaces: true
 })
-export class HumanoFormComponent {
+export class AnimalFormComponent {
   private fb = inject(FormBuilder);
-  private humanoService = inject(HumanoService);
+  private animalService = inject(AnimalService);
   private route = inject(ActivatedRoute);
   private sharedService = inject(SharedService);
 
-  humanoForm: FormGroup;
-  requisicao!: RequisicaoHumano;
+  animalForm: FormGroup;
+  requisicao!: RequisicaoAnimal;
+  selectRaca: ComboBoxRaca[] =[];
 
   constructor(){
-    this.humanoForm= this.fb.group({
+    this.comboBox();
+    this.animalForm= this.fb.group({
       id: [null],
       nome: [''],
-      sobrenome: [''],
       dataNascimento: [''],
-      cep: [''],
-      endereco: [''],
-      complemento: [''],
-      fone: [''],
-      whatsapp: [''],
-      status: [''],
-      email: [''],
-      empresa:['']
+      cor: [''],
+      especie: [''],
+      peso: [''],
+      sexo: [''],
+      foto: [''],
+      observacao: [''],
+      raca: [''],
+      humano: [''],
+      empresa:[''],
+      status: ['']
     });
     this.preencherFormulario();
   }
@@ -50,33 +54,34 @@ export class HumanoFormComponent {
   public preencherFormulario(): void{
     const routeParams = this.route.snapshot.params;
     if(routeParams["id"] > 0){
-      this.humanoService.loadById(routeParams["id"]).pipe(
+      this.animalService.loadById(routeParams["id"]).pipe(
         take(1)
-      ).subscribe((res: RespostaHumano)=>{
-        this.humanoForm.patchValue(res);
+      ).subscribe((res: RespostaAnimal)=>{
+        this.animalForm.patchValue(res);
       });
     }
   }
 
   public onSubmit(){
-    let form = this.humanoForm;
+    let form = this.animalForm;
     form.get('empresa')?.setValue(1);
     this.requisicao = {
      id: form.get('id')?.value,
      nome: form.get('nome')?.value,
-     sobrenome: form.get('sobrenome')?.value,
      dataNascimento: form.get('dataNascimento')?.value,
-     cep: form.get('cep')?.value,
-     endereco: form.get('endereco')?.value,
-     complemento: form.get('complemento')?.value,
-     fone: form.get('fone')?.value,
-     whatsapp: form.get('whatsapp')?.value,
-     email: form.get('email')?.value,
-     status: form.get('status')?.value,
+     cor: form.get('cor')?.value,
+     especie: form.get('especie')?.value,
+     peso: form.get('peso')?.value,
+     sexo: form.get('sexo')?.value,
+     foto: form.get('foto')?.value,
+     observacao: form.get('observacao')?.value,
+     raca: form.get('raca')?.value,
+     humano: form.get('humano')?.value,
      empresa: form.get('empresa')?.value,
+     status: form.get('status')?.value
     }
    if(form.valid){
-     this.humanoService.save(this.requisicao).pipe(
+     this.animalService.save(this.requisicao).pipe(
        take(1)
      ).subscribe({
          next: (res) => {
@@ -89,5 +94,13 @@ export class HumanoFormComponent {
          },
      });
    }
+ }
+
+ public comboBox(){
+    this.sharedService.comboBoxRaca().pipe(
+      take(1)
+    ).subscribe((res: ComboBoxRaca[])=>{
+        this.selectRaca = res
+    });
  }
 }

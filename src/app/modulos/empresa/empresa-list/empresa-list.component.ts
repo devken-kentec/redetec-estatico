@@ -1,36 +1,36 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ModalFormComponent } from '../../modal/modal-form/modal-form.component';
-import { HumanoService } from '../shared/humano.service';
+import { EmpresaService } from '../shared/empresa.service';
 import { SharedService } from '../../shared/shared.service';
-import { RespostaHumano } from '../../../domain/humano-domain';
+import { RespostaEmpresa } from '../../../domain/empresa.domain';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-humano-list',
+  selector: 'app-empresa-list',
   standalone: true,
   imports: [RouterModule, ModalFormComponent],
-  templateUrl: './humano-list.component.html',
-  styleUrl: './humano-list.component.css',
+  templateUrl: './empresa-list.component.html',
+  styleUrl: './empresa-list.component.css',
   preserveWhitespaces: true
 })
-export class HumanoListComponent {
-  private humanoService = inject(HumanoService);
+export class EmpresaListComponent {
+  private empresaService = inject(EmpresaService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private sharedService = inject(SharedService);
 
-  listaHumano: RespostaHumano[] = [];
-  humano!: RespostaHumano;
+  listaEmpresa: RespostaEmpresa[] = [];
+  empresa!: RespostaEmpresa;
   registroDeletado: boolean = true;
 
   ngOnInit(): void {
-    this.listarHumano();
+    this.listarEmpresa();
   }
 
-  public listarHumano(){
-    this.humanoService.list().subscribe((res: RespostaHumano[])=>{
-        this.listaHumano = res
+  public listarEmpresa(){
+    this.empresaService.list().subscribe((res: RespostaEmpresa[])=>{
+        this.listaEmpresa = res
     });
   }
 
@@ -38,18 +38,18 @@ export class HumanoListComponent {
     this.router.navigate(["edit", id], { relativeTo: this.route });
   }
 
-  public recuperarDados(lista: RespostaHumano): RespostaHumano {
-    return this.humano = lista;
+  public recuperarDados(lista: RespostaEmpresa): RespostaEmpresa {
+    return this.empresa = lista;
   }
 
   public excluirRegistro(id: number){
-    this.humanoService.delete(id)
+    this.empresaService.delete(id)
     .pipe(take(1))
     .subscribe({
       next: (res) => {
         console.log(res);
         this.sharedService.saveShow("Status Alterado!", "Sucesso!!");
-        this.listarHumano();
+        this.listarEmpresa();
       },
       error: (err) => {
         console.log(err);

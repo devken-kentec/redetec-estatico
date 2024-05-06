@@ -2,14 +2,14 @@
   <nav>
     <ol class="breadcrumb bg-white">
       <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
-      <li class="breadcrumb-item"><a routerLink="/humano">Listagem</a></li>
-      <li class="breadcrumb-item active">Humano</li>
+      <li class="breadcrumb-item"><a routerLink="/empresa">Listagem</a></li>
+      <li class="breadcrumb-item active">Empresa</li>
     </ol>
   </nav>
-  <form class="needs-validation" novalidate [formGroup]="humanoForm">
+  <form class="needs-validation" novalidate [formGroup]="empresaForm">
     <div class="card">
       <div class="card-header bg-dark" style="color: white; font-size: 14pt; font-weight: bold;">
-        Inclusão e Gerenciamnento de Humanos
+        Inclusão e Gerenciamnento de Empresas
       </div>
       <div class="card-body">
         <nav class="col-md-12">
@@ -31,46 +31,28 @@
                   formControlName="id"
                   readonly/>
               </div>
-              <div class="form-group col-md-4">
-                <label for="nome">Nome:</label>
+              <div class="form-group col-md-8">
+                <label for="nomeFantasia">Nome Fantasia:</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="nome"
-                  formControlName="nome"
-                  />
-              </div>
-              <div class="form-group col-md-4">
-                <label for="sobrenome">Sobrenome:</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="sobrenome"
-                  formControlName="sobrenome"
+                  id="nomeFantasia"
+                  formControlName="nomeFantasia"
                   />
               </div>
               <div class="form-group col-md-2">
-                <label for="dataNascimento">Data de Nascimemto:</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="dataNascimento"
-                  formControlName="dataNascimento"
-                  />
+                <label for="cep">CEP:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cep"
+                    formControlName="cep"
+                    />
               </div>
             </div>
           </div>
           <div class="form-row col-md-12">
-            <div class="form-group col-md-2">
-              <label for="cep">CEP:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="cep"
-                formControlName="cep"
-                />
-            </div>
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-6">
               <label for="endereco">Endereço:</label>
               <input
                 type="text"
@@ -79,7 +61,7 @@
                 formControlName="endereco"
                 />
             </div>
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-6">
               <label for="complemento">Complemento:</label>
               <input
                 type="text"
@@ -91,12 +73,12 @@
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-3">
-              <label for="fone">Telefone:</label>
+              <label for="telefone">Telefone:</label>
               <input
                 type="text"
                 class="form-control"
-                id="fone"
-                formControlName="fone"
+                id="telefone"
+                formControlName="telefone"
                 />
             </div>
             <div class="form-group col-md-3">
@@ -106,15 +88,6 @@
                 class="form-control"
                 id="whatsapp"
                 formControlName="whatsapp"
-                />
-            </div>
-            <div class="form-group col-md-4">
-              <label for="email">Email:</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                formControlName="email"
                 />
             </div>
             <div class="form-group col-md-2">
@@ -134,8 +107,9 @@
     <button  type="submit" data-toggle="modal" data-target="#ModalSalvar" class="btn btn-success" (click)="onSubmit()">
       <i class="fas fa-save"></i> &nbsp;Salvar
     </button>
-    <button routerLink="/humano" class="btn btn-info ">
+    <button routerLink="/empresa" class="btn btn-info ">
       <i class="fas fa-backward"></i>&nbsp;Voltar
     </button>
   </div>
 </div>
+

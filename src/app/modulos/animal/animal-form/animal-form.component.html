@@ -2,14 +2,14 @@
   <nav>
     <ol class="breadcrumb bg-white">
       <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
-      <li class="breadcrumb-item"><a routerLink="/humano">Listagem</a></li>
+      <li class="breadcrumb-item"><a routerLink="/animal">Listagem</a></li>
       <li class="breadcrumb-item active">Humano</li>
     </ol>
   </nav>
-  <form class="needs-validation" novalidate [formGroup]="humanoForm">
+  <form class="needs-validation" novalidate [formGroup]="animalForm">
     <div class="card">
       <div class="card-header bg-dark" style="color: white; font-size: 14pt; font-weight: bold;">
-        Inclusão e Gerenciamnento de Humanos
+        Inclusão e Gerenciamnento de Animais
       </div>
       <div class="card-body">
         <nav class="col-md-12">
@@ -31,7 +31,7 @@
                   formControlName="id"
                   readonly/>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-5">
                 <label for="nome">Nome:</label>
                 <input
                   type="text"
@@ -40,14 +40,13 @@
                   formControlName="nome"
                   />
               </div>
-              <div class="form-group col-md-4">
-                <label for="sobrenome">Sobrenome:</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="sobrenome"
-                  formControlName="sobrenome"
-                  />
+              <div class="form-group col-md-3">
+                <label for="especie">Espécie:</label>
+                <select id="especie" class="form-control" formControlName="especie">
+                  <option value="">Selecione</option>
+                  <option>Canino</option>
+                  <option>Felino</option>
+                </select>
               </div>
               <div class="form-group col-md-2">
                 <label for="dataNascimento">Data de Nascimemto:</label>
@@ -62,59 +61,50 @@
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-2">
-              <label for="cep">CEP:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="cep"
-                formControlName="cep"
-                />
+              <label for="cor">Cor:</label>
+              <select id="cor" class="form-control" formControlName="cor">
+                <option value="">Selecione</option>
+                <option>Branco</option>
+                <option>Preto</option>
+                <option>Amarelo</option>
+                <option>Pintado</option>
+                <option>Malhado</option>
+                <option>Creme</option>
+                <option>Outros</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="sexo">Sexo:</label>
+              <select id="sexo" class="form-control" formControlName="sexo">
+                <option value="">Selecione</option>
+                <option>Masculino</option>
+                <option>Feminino</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="raca">Raça:</label>
+              <select id="raca" class="form-control" formControlName="raca">
+                <option value="">Selecione</option>
+                @for( select of selectRaca; track select.id){
+                  <option [value]="select.id">{{ select.descricao }}</option>
+                }
+              </select>
             </div>
             <div class="form-group col-md-5">
-              <label for="endereco">Endereço:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="endereco"
-                formControlName="endereco"
-                />
-            </div>
-            <div class="form-group col-md-5">
-              <label for="complemento">Complemento:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="complemento"
-                formControlName="complemento"
-                />
+              <label for="humano">Humano:</label>
+              <select id="humano" class="form-control" formControlName="humano">
+                <option value="">Selecione</option>
+              </select>
             </div>
           </div>
           <div class="form-row col-md-12">
-            <div class="form-group col-md-3">
-              <label for="fone">Telefone:</label>
+            <div class="form-group col-md-10">
+              <label for="observacao">Obs.:</label>
               <input
                 type="text"
                 class="form-control"
-                id="fone"
-                formControlName="fone"
-                />
-            </div>
-            <div class="form-group col-md-3">
-              <label for="whatsapp">Whatsapp:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="whatsapp"
-                formControlName="whatsapp"
-                />
-            </div>
-            <div class="form-group col-md-4">
-              <label for="email">Email:</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                formControlName="email"
+                id="observacao"
+                formControlName="observacao"
                 />
             </div>
             <div class="form-group col-md-2">
@@ -134,7 +124,7 @@
     <button  type="submit" data-toggle="modal" data-target="#ModalSalvar" class="btn btn-success" (click)="onSubmit()">
       <i class="fas fa-save"></i> &nbsp;Salvar
     </button>
-    <button routerLink="/humano" class="btn btn-info ">
+    <button routerLink="/animal" class="btn btn-info ">
       <i class="fas fa-backward"></i>&nbsp;Voltar
     </button>
   </div>

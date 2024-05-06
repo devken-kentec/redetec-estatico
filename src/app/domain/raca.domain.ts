@@ -10,4 +10,9 @@ export interface RespostaRaca {
   status: string;
 }
 
+export interface ComboBoxRaca {
+  id: number;
+  descricao: string;
+}
+
 
