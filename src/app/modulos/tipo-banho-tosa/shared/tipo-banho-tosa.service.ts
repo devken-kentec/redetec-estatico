@@ -39,5 +39,4 @@ export class TipoBanhoTosaService {
   public delete(id: number): Observable<RespostaTipoBanhoTosa> {
     return this.http.patch<RespostaTipoBanhoTosa>(`${this.api}/delete/${id}`, 'Inativo');
   }
-
 }

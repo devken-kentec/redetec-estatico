@@ -27,3 +27,9 @@ export interface RespostaHumano {
   status: string;
   empresa: number;
 }
+
+export interface ComboBoxHumano {
+  id: number;
+  nome: string;
+  sobrenome: string;
+}

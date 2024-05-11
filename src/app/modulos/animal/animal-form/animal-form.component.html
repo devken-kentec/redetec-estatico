@@ -3,7 +3,7 @@
     <ol class="breadcrumb bg-white">
       <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
       <li class="breadcrumb-item"><a routerLink="/animal">Listagem</a></li>
-      <li class="breadcrumb-item active">Humano</li>
+      <li class="breadcrumb-item active">Animal</li>
     </ol>
   </nav>
   <form class="needs-validation" novalidate [formGroup]="animalForm">
@@ -22,8 +22,8 @@
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class="form-row col-md-12 mt-3">
-              <div class="form-group col-md-2">
-                <label for="id">Identificador:</label>
+              <div class="form-group col-md-1">
+                <label for="id">ID:</label>
                 <input
                   type="text"
                   class="form-control"
@@ -40,12 +40,21 @@
                   formControlName="nome"
                   />
               </div>
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-2">
                 <label for="especie">Espécie:</label>
                 <select id="especie" class="form-control" formControlName="especie">
                   <option value="">Selecione</option>
                   <option>Canino</option>
                   <option>Felino</option>
+                </select>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="porte">Porte:</label>
+                <select id="porte" class="form-control" formControlName="porte">
+                  <option value="">Selecione</option>
+                  <option>Pequeno</option>
+                  <option>Médio</option>
+                  <option>Grande</option>
                 </select>
               </div>
               <div class="form-group col-md-2">
@@ -61,12 +70,27 @@
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-2">
+              <label for="peso">Peso:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Kg</span>
+                </div>
+              <input
+                type="number"
+                class="form-control"
+                id="peso"
+                formControlName="peso"
+                />
+              </div>
+            </div>
+            <div class="form-group col-md-2">
               <label for="cor">Cor:</label>
               <select id="cor" class="form-control" formControlName="cor">
                 <option value="">Selecione</option>
                 <option>Branco</option>
                 <option>Preto</option>
                 <option>Amarelo</option>
+                <option>Caramelo</option>
                 <option>Pintado</option>
                 <option>Malhado</option>
                 <option>Creme</option>
@@ -81,7 +105,7 @@
                 <option>Feminino</option>
               </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
               <label for="raca">Raça:</label>
               <select id="raca" class="form-control" formControlName="raca">
                 <option value="">Selecione</option>
@@ -90,10 +114,13 @@
                 }
               </select>
             </div>
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-4">
               <label for="humano">Humano:</label>
               <select id="humano" class="form-control" formControlName="humano">
                 <option value="">Selecione</option>
+                @for( select of selectHumano; track select.id){
+                  <option [value]="select.id">{{ select.nome }} {{ select.sobrenome }}</option>
+                }
               </select>
             </div>
           </div>
@@ -128,4 +155,6 @@
       <i class="fas fa-backward"></i>&nbsp;Voltar
     </button>
   </div>
+</div>
+<div>
 </div>
