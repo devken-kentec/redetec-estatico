@@ -3,6 +3,7 @@ export interface RequisicaoAnimal {
   nome: string;
   dataNascimento: string;
   cor: string;
+  porte: string;
   especie: string;
   peso: number;
   sexo: string;
@@ -17,8 +18,12 @@ export interface RequisicaoAnimal {
 export interface RespostaAnimal {
   id: number;
   nome: string;
+  humanoCompleto: string;
+  contatoFone: string;
+  contatoZap: string;
   dataNascimento: string;
   cor: string;
+  porte: string;
   especie: string;
   peso: number;
   sexo: string;

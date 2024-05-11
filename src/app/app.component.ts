@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import  packageJson  from '../../package.json';
-import { ContatoFormComponent } from './modulos/contato/contato-form/contato-form.component';
 import { HomeComponent } from './modulos/home/home.component';
 
 @Component({

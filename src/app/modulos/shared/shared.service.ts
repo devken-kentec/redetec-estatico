@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { ComboBoxRaca } from '../../domain/raca.domain';
+import { ComboBoxHumano } from '../../domain/humano-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,7 @@ export class SharedService {
     return this.http.get<ComboBoxRaca[]>(`${this.api}/raca/v1/select`);
   }
 
+  public comboBoxHumano(): Observable<ComboBoxHumano[]>{
+    return this.http.get<ComboBoxHumano[]>(`${this.api}/humano/v1/select`);
+  }
 }
