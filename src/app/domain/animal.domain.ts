@@ -1,3 +1,5 @@
+import { RespostaHumano } from "./humano-domain";
+
 export interface RequisicaoAnimal {
   id: number;
   nome: string;
@@ -33,4 +35,10 @@ export interface RespostaAnimal {
   humano: number;
   empresa: number;
   status: string;
+}
+
+export interface ComboBoxAnimal {
+  id: number;
+  nome: string;
+  humano: RespostaHumano;
 }

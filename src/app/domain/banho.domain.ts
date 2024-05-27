@@ -18,4 +18,8 @@ export interface RespostaBanho {
 	observacao: string;
 	animal: number;
 	tipoBanhoTosa: number;
+  animalNome: string;
+  animalHumano: string;
+  tipoBanhoDescricao: string;
+	tipoBanhoValor: number;
 }
