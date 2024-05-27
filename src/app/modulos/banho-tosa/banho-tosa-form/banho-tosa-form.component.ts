@@ -9,6 +9,7 @@ import { take } from 'rxjs';
 import { ComboBoxAnimal } from '../../../domain/animal.domain';
 import { ComboBoxTipoBanhoTosa } from '../../../domain/tipo-banho-tosa.domain';
 
+
 @Component({
   selector: 'app-banho-tosa-form',
   standalone: true,
@@ -101,5 +102,4 @@ export class BanhoTosaFormComponent {
         this.selectTipoBanhoTosa = res
     });
    }
-
 }
