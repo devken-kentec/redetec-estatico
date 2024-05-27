@@ -12,7 +12,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterModule, CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './tipo-vacina-form.component.html',
-  styleUrl: './tipo-vacina-form.component.css'
+  styleUrl: './tipo-vacina-form.component.css',
+  preserveWhitespaces: true
 })
 export class TipoVacinaFormComponent {
 

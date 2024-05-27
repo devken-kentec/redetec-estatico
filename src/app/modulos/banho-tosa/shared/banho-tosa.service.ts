@@ -13,7 +13,7 @@ export class BanhoTosaService {
   private http = inject(HttpClient);
 
   public list(): Observable<RespostaBanho[]>{
-    return this.http.get<RespostaBanho[]>(`${this.api}/listarAnimal`);
+    return this.http.get<RespostaBanho[]>(`${this.api}/listarBanho`);
   }
 
   public loadById(id: number): Observable<RespostaBanho> {

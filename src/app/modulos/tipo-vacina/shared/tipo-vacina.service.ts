@@ -39,6 +39,4 @@ export class TipoVacinaService {
   public delete(id: number): Observable<RespostaTipoVacina> {
     return this.http.patch<RespostaTipoVacina>(`${this.api}/delete/${id}`, 'Inativo');
   }
-
-  constructor() { }
 }
