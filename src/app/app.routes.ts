@@ -8,5 +8,6 @@ export const routes: Routes = [
   { path: 'animal', loadChildren: ()=> import('./modulos/animal/animal.routes').then((p) => p.animalHoutes)},
   { path: 'banho', loadChildren: ()=> import('./modulos/banho-tosa/banho-tosa.routes').then((p) => p.banhoTosaHoutes)},
   { path: 'tipo-banho', loadChildren: ()=> import('./modulos/tipo-banho-tosa/tipo-banho-tosa.routes').then((p) => p.tipoBanhoTosaHoutes)},
-  { path: 'tipo-vacina', loadChildren: ()=> import('./modulos/tipo-vacina/tipo-vacina.routes').then((p) => p.tipoVacinaHoutes)}
+  { path: 'tipo-vacina', loadChildren: ()=> import('./modulos/tipo-vacina/tipo-vacina.routes').then((p) => p.tipoVacinaHoutes)},
+  { path: 'vacina', loadChildren: ()=> import('./modulos/vacina/vacina.routes').then((p) => p.vacinaHoutes)}
 ];

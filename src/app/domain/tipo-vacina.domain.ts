@@ -11,3 +11,9 @@ export interface RespostaTipoVacina{
     valor: number;
     status:string;
 }
+
+export interface ComboBoxTipoVacina {
+    id: number;
+    descricao: string;
+    valor: number;
+  }

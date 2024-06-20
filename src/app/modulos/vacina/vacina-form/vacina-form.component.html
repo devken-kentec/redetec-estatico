@@ -1,1 +1,113 @@
-<p>vacina-form works!</p>
+<div class="col-12 " style="margin-top: 180px;">
+    <nav>
+      <ol class="breadcrumb bg-white">
+        <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
+        <li class="breadcrumb-item"><a routerLink="/vacina">Listagem</a></li>
+        <li class="breadcrumb-item active">Vacina</li>
+      </ol>
+    </nav>
+    <form class="needs-validation" novalidate [formGroup]="vacinaForm">
+      <div class="card">
+        <div class="card-header bg-dark" style="color: white; font-size: 14pt; font-weight: bold;">
+          Inclusão e Gerenciamento de Vacina.
+        </div>
+        <div class="card-body">
+          <nav class="col-md-12">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Cadastro</a>
+            </div>
+          </nav>
+          <div>
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <div class="form-row col-md-12 mt-3">
+                <div class="form-group col-md-1">
+                  <label for="id">ID:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="id"
+                    formControlName="id"
+                    readonly/>
+                </div>
+                <div class="form-group col-md-5">
+                  <label for="animal">Animal:</label>
+                  <select id="animal" class="form-control" formControlName="animal">
+                    <option value="">Selecione</option>
+                    @for( select of selectAnimal; track select.id){
+                      <option [value]="select.id">{{ select.nome }} - {{ select.humano.nome }} {{ select.humano.sobrenome }}</option>
+                    }
+                  </select>
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="inicio">Inicio:</label>
+                  <input
+                    type="datetime-local"
+                    id="inicio"
+                    class="form-control"
+                    formControlName="inicio"/>
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="statusVacina">Status da Vacina:</label>
+                  <select id="statusVacina" class="form-control" formControlName="statusVacina">
+                    <option value="">Selecione</option>
+                    <option>Em espera</option>
+                    <option>Finalizado</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row col-md-12">
+              <div class="form-group col-md-3">
+                <label for="termino">Termino:</label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  id="termino"
+                  formControlName="termino"
+                  />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="tipoVacina">Tipo Vacina:</label>
+                <select id="tipoVacina" class="form-control" formControlName="tipoVacina">
+                  <option value="">Selecione</option>
+                  @for( select of selectTipoVacina; track select.id){
+                    <option [value]="select.id">{{ select.descricao }} - R$ {{ select.valor.toString().replace('.', ',') }}</option>
+                  }
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="status">Status:</label>
+                <select id="status" class="form-control" formControlName="status">
+                  <option value="">Selecione</option>
+                  <option>Ativo</option>
+                  <option>Inativo</option>
+                </select>
+            </div>
+            <div class="form-row col-md-12">
+              <div class="form-group col-md-12">
+                <label for="observacao">Obs.:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="observacao"
+                  formControlName="observacao"
+                  />
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="float-right mt-3">
+      <button  type="submit" data-toggle="modal" data-target="#ModalSalvar" class="btn btn-success" (click)="onSubmit()">
+        <i class="fas fa-save"></i> &nbsp;Salvar
+      </button>
+      <button routerLink="/vacina" class="btn btn-info ">
+        <i class="fas fa-backward"></i>&nbsp;Voltar
+      </button>
+    </div>
+  </div>
+  

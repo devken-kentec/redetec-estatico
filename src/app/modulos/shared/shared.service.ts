@@ -7,6 +7,7 @@ import { ComboBoxRaca } from '../../domain/raca.domain';
 import { ComboBoxHumano } from '../../domain/humano-domain';
 import { ComboBoxAnimal } from '../../domain/animal.domain';
 import { ComboBoxTipoBanhoTosa } from '../../domain/tipo-banho-tosa.domain';
+import { ComboBoxTipoVacina } from '../../domain/tipo-vacina.domain';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,10 @@ export class SharedService {
 
   public comboBoxTipoBanhoTosa(): Observable<ComboBoxTipoBanhoTosa[]>{
     return this.http.get<ComboBoxTipoBanhoTosa[]>(`${this.api}/tipoBanhoTosa/v1/select`);
+  }
+
+  public comboBoxTipoVacina(): Observable<ComboBoxTipoVacina[]>{
+    return this.http.get<ComboBoxTipoVacina[]>(`${this.api}/tipoVacina/v1/select`);
   }
 
   public formatDate(data: string){
