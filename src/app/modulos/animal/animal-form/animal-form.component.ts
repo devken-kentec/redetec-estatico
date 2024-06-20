@@ -7,6 +7,7 @@ import { SharedService } from '../../shared/shared.service';
 import { RequisicaoAnimal, RespostaAnimal } from '../../../domain/animal.domain';
 import { take } from 'rxjs';
 import { ComboBoxRaca } from '../../../domain/raca.domain';
+import { ComboBoxHumano } from '../../../domain/humano-domain';
 
 @Component({
   selector: 'app-animal-form',
@@ -29,7 +30,8 @@ export class AnimalFormComponent {
 
   animalForm: FormGroup;
   requisicao!: RequisicaoAnimal;
-  selectRaca: ComboBoxRaca[] =[];
+  selectRaca: ComboBoxRaca[] = [];
+  selectHumano: ComboBoxHumano[] = [];
 
   constructor(){
     this.comboBox();
@@ -38,6 +40,7 @@ export class AnimalFormComponent {
       nome: [''],
       dataNascimento: [''],
       cor: [''],
+      porte: [''],
       especie: [''],
       peso: [''],
       sexo: [''],
@@ -70,6 +73,7 @@ export class AnimalFormComponent {
      nome: form.get('nome')?.value,
      dataNascimento: form.get('dataNascimento')?.value,
      cor: form.get('cor')?.value,
+     porte: form.get('porte')?.value,
      especie: form.get('especie')?.value,
      peso: form.get('peso')?.value,
      sexo: form.get('sexo')?.value,
@@ -101,6 +105,12 @@ export class AnimalFormComponent {
       take(1)
     ).subscribe((res: ComboBoxRaca[])=>{
         this.selectRaca = res
+    });
+
+    this.sharedService.comboBoxHumano().pipe(
+      take(1)
+    ).subscribe((res: ComboBoxHumano[])=>{
+        this.selectHumano = res
     });
  }
 }

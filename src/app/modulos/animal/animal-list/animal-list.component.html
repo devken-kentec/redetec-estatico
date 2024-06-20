@@ -1,1 +1,65 @@
-<p>animal-list works!</p>
+<div class="col-md-12" style="margin-top: 180px;">
+  <nav>
+    <ol class="breadcrumb bg-white">
+      <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
+      <li class="breadcrumb-item active">Listagem</li>
+    </ol>
+  </nav>
+  <div class="row mb-4">
+    <div class="col-md">
+      <h1 class="h5 border-left pl-2">
+        Listagem de Animais
+      </h1>
+    </div>
+    <div class="col-md">
+      <button routerLink="new" class="btn btn-primary float-right">
+        <i class="fas fa-user-plus"></i> Cadastrar Animal
+      </button>
+    </div>
+  </div>
+  <div id="table" class="table-responsive">
+    <table class="table table-borderless">
+      <thead>
+        <tr class="bg-dark text-light">
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Humano</th>
+          <th>Fone</th>
+          <th>Whatspp</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(lista of listaAnimal; track lista.id; let i = $index){
+        <tr>
+          <td>{{ lista.id }}</td>
+          <td>{{ lista.nome }}</td>
+          <td>{{ lista.humanoCompleto}}</td>
+          <td>{{ lista.contatoFone }}</td>
+          <td>{{ lista.contatoZap }}</td>
+          <td>{{ lista.status }}</td>
+          <td>
+            <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
+            @if(lista.id > 0){
+              <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
+            }
+
+          </td>
+        </tr>
+      } @empty {
+        <div class="d-flex justify-content-center mt-3 ml-5">
+          <div class="alert alert-warning" style="width: 800px;" role="alert">
+            A lista de Humanos esta vazia!
+          </div>
+        </div>
+      }
+      </tbody>
+    </table>
+  </div>
+    @if(animal){
+      <div>
+        <app-modal-form [entrada]="animal" (emitirEvento)="excluirRegistro($event)"/>
+      </div>
+    }
+</div>

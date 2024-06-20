@@ -1,3 +1,35 @@
-<div>
-    <app-contato-form/>
+<div class="col-12 " style="margin-top: 180px;">
+  <nav>
+    <ol class="breadcrumb bg-white">
+      <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
+      <li class="breadcrumb-item"><a routerLink="/humano">Listagem</a></li>
+      <li class="breadcrumb-item active">Humano</li>
+    </ol>
+  </nav>
+  <form class="needs-validation" novalidate>
+    <div class="card">
+      <div class="card-header bg-dark" style="color: white; font-size: 14pt; font-weight: bold;">
+        Menu Gambiarra!
+      </div>
+      <div class="d-flex justify-content-center">
+        <ul class="mt-3">
+          <li class="btn btn-primary" routerLink="/humano">Humano</li>
+          <li class="btn btn-primary" routerLink="/animal">Animal</li>
+          <li class="btn btn-primary" routerLink="/raca">Raça</li>
+          <li class="btn btn-primary" routerLink="/tipo-banho">Tipo Banho</li>
+          <li class="btn btn-primary" routerLink="/banho">Banho</li>
+          <li class="btn btn-primary" routerLink="/tipo-vacina">Tipo Vacina</li>
+          <li class="btn btn-primary" routerLink="/banho">Vacina</li>
+        </ul>
+      </div>
+    </div>
+  </form>
+  <div class="float-right mt-3">
+    <button  type="submit" data-toggle="modal" data-target="#ModalSalvar" class="btn btn-success">
+      <i class="fas fa-save"></i> &nbsp;Salvar
+    </button>
+    <button routerLink="/humano" class="btn btn-info ">
+      <i class="fas fa-backward"></i>&nbsp;Voltar
+    </button>
+  </div>
 </div>

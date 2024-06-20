@@ -11,3 +11,9 @@ export interface RespostaTipoBanhoTosa {
   valor: number;
   status: string;
 }
+
+export interface ComboBoxTipoBanhoTosa {
+  id: number;
+  descricao: string;
+  valor: number;
+}
