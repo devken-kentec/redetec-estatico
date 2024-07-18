@@ -7,6 +7,11 @@ export interface RequisicaoBanho {
 	observacao: string;
 	animal: number;
 	tipoBanhoTosa: number;
+  statusPagamentoBanho: string;
+	transporte: number;
+  buscar: boolean;
+  entregar: boolean;
+  desconto: number;
 }
 
 export interface RespostaBanho {
@@ -22,4 +27,9 @@ export interface RespostaBanho {
   animalHumano: string;
   tipoBanhoDescricao: string;
 	tipoBanhoValor: number;
+  statusPagamentoBanho: string;
+	transporte: number;
+  buscar: boolean;
+  entregar: boolean;
+  desconto: number;
 }

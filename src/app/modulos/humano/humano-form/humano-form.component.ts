@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HumanoService } from '../shared/humano.service';
 import { SharedService } from '../../shared/shared.service';
-import { RequisicaoHumano, RespostaHumano } from '../../../domain/humano-domain';
+import { RequisicaoHumano, RespostaHumano } from '../../../domain/humano.domain';
 import { take } from 'rxjs';
 
 @Component({
@@ -40,7 +40,7 @@ export class HumanoFormComponent {
       complemento: [''],
       fone: [''],
       whatsapp: [''],
-      status: [''],
+      status: ['Ativo'],
       email: [''],
       empresa:['']
     });
@@ -89,5 +89,6 @@ export class HumanoFormComponent {
          },
      });
    }
+   form.reset();
  }
 }

@@ -7,7 +7,7 @@ import { SharedService } from '../../shared/shared.service';
 import { RequisicaoAnimal, RespostaAnimal } from '../../../domain/animal.domain';
 import { take } from 'rxjs';
 import { ComboBoxRaca } from '../../../domain/raca.domain';
-import { ComboBoxHumano } from '../../../domain/humano-domain';
+import { ComboBoxHumano } from '../../../domain/humano.domain';
 
 @Component({
   selector: 'app-animal-form',
@@ -49,7 +49,7 @@ export class AnimalFormComponent {
       raca: [''],
       humano: [''],
       empresa:[''],
-      status: ['']
+      status: ['Ativo']
     });
     this.preencherFormulario();
   }
@@ -98,6 +98,7 @@ export class AnimalFormComponent {
          },
      });
    }
+   form.reset();
  }
 
  public comboBox(){

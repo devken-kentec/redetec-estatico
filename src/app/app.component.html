@@ -11,19 +11,22 @@
       <div class="col col-lg-9 col-xl-9 barra d-flex align-items-center justify-content-end">
         <ul class="list-unstyled d-none d-lg-flex d-xl-flex">
           <li class="nav-item">
-              <a routerLink="/casa" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Home</a>
+              <a routerLink="/humano" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Humano</a>
           </li>
           <li class="nav-item">
-              <a routerLink="/home" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Shopping</a>
+              <a routerLink="/animal" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Animal</a>
           </li>
           <li class="nav-item">
-            <a data-toggle="collapse" href="#collapseMenu" class="nav-link">Cursos</a>
+            <a routerLink="/banho" data-toggle="collapse" href="#collapseMenu" class="nav-link">Banho e Tosa</a>
           </li>
           <li class="nav-item">
-            <a data-toggle="collapse" href="#collapseMenu" class="nav-link">Consultorias</a>
+            <a routerLink="banho/status/banho" data-toggle="collapse" href="#collapseMenu" class="nav-link">Status Banho</a>
           </li>
           <li class="nav-item">
-              <a data-toggle="collapse" href="#collapseMenu" class="nav-link">Empréstimos</a>
+            <a routerLink="/vacina" data-toggle="collapse" href="#collapseMenu" class="nav-link">Vacinas</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/home" data-toggle="collapse" href="#collapseMenu" class="nav-link">+ Opções</a>
           </li>
         </ul>
       </div>
@@ -32,24 +35,33 @@
 <div class="collapse menu d-lg-none d-xl-none bg-light" id="collapseMenu">
   <ul class="list-unstyled">
     <li class="nav-item">
-        <a data-toggle="collapse" href="#collapseMenu"  class="nav-link">HOME</a>
+        <a data-toggle="collapse" (click)="navegarPara('humano')" href="#collapseMenu"  class="nav-link">HUMANO</a>
     </li>
     <li class="nav-item">
-        <a data-toggle="collapse" href="#collapseMenu"  class="nav-link">SHOPPING</a>
+      <a data-toggle="collapse" (click)="navegarPara('raca')" href="#collapseMenu"  class="nav-link">RAÇA</a>
+  </li>
+    <li class="nav-item">
+        <a data-toggle="collapse" (click)="navegarPara('animal')" href="#collapseMenu"  class="nav-link">ANIMAL</a>
     </li>
     <li class="nav-item">
-      <a data-toggle="collapse" href="#collapseMenu" class="nav-link">CURSOS</a>
+      <a data-toggle="collapse" (click)="navegarPara('tipoBanho')" href="#collapseMenu" class="nav-link">TIPO BANHO</a>
     </li>
     <li class="nav-item">
-        <a data-toggle="collapse" href="#collapseMenu" class="nav-link">CONSULTORIAS</a>
+      <a data-toggle="collapse" (click)="navegarPara('banhoTosa')" href="#collapseMenu" class="nav-link">BANHO É TOSA</a>
     </li>
     <li class="nav-item">
-        <a data-toggle="collapse" href="#collapseMenu" class="nav-link">EMPRÉSTIMOS</a>
+        <a data-toggle="collapse" (click)="navegarPara('statusBanho')" href="#collapseMenu" class="nav-link">STATUS BANHO</a>
+    </li>
+    <li class="nav-item">
+      <a data-toggle="collapse" (click)="navegarPara('tipoVacina')" href="#collapseMenu" class="nav-link">TIPO VACINA</a>
+    </li>
+    <li class="nav-item">
+        <a data-toggle="collapse" (click)="navegarPara('vacina')" href="#collapseMenu" class="nav-link">VACINAS</a>
     </li>
   </ul>
 </div>
 @if(url_atual !== 'http://localhost:4200/home'){
-  <div class="container" style="min-height: 600px;">
+  <div class="container" style="min-height: 900px;">
     <router-outlet/>
   </div>
 }

@@ -1,0 +1,66 @@
+
+<div class="col-12 col-md-12" style="margin-top: 120px;">
+ <div id="table" class="table-responsive mt-3">
+  <table class="table table-borderless" style="font-size: 9pt;">
+    <thead>
+      <tr class="bg-dark text-light">
+        <th>Animal</th>
+        <th>Humano</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(lista of listaBanhoTosa; track lista.id; let i = $index){
+      <tr>
+        <td>{{ lista.animalNome }}</td>
+        <td>{{ lista.animalHumano }}</td>
+        <td>
+          @if(lista.statusBanhoTosa === 'Em espera'){
+            <button  class="btn btn-danger btn-status-b" (click)="alterarStatusBanho(lista)" data-toggle="modal" data-target="#staticBackdrop">Em espera</button>
+          }
+          @if(lista.statusBanhoTosa === 'Banho'){
+            <button  class="btn btn-primary btn-status-b" (click)="alterarStatusBanho(lista)" data-toggle="modal" data-target="#staticBackdrop">Banho</button>
+          }
+          @if(lista.statusBanhoTosa === 'Finalizado'){
+            <button  class="btn btn-success btn-status-b" (click)="alterarStatusBanho(lista)" data-toggle="modal" data-target="#staticBackdrop">Finalizado</button>
+          }
+        </td>
+      </tr>
+    } @empty {
+      <div class="d-flex justify-content-center mt-3 ml-5">
+        <div class="alert alert-warning" style="width: 400px;" role="alert">
+          A lista de Banhos esta vazia!
+        </div>
+      </div>
+    }
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Confirmar mudança do Status para: </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <span>{{ this.novoStatusBanho }}</span>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-success" (click)="editarStatusBanho()">Atualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

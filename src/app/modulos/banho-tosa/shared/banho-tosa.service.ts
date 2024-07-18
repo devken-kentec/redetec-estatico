@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RequisicaoBanho, RespostaBanho } from '../../../domain/banho.domain';
 
@@ -20,6 +20,29 @@ export class BanhoTosaService {
     return this.http.get<RespostaBanho>(`${this.api}/recuperar/${id}`)
   }
 
+  public listCustomAnimalStatusPagamento(animal: number, statusPagamentoBanho: string):Observable<RespostaBanho[]>{
+    const httpParams = new HttpParams()
+    .set("animal", animal)
+    .set("statusPagamentoBanho", statusPagamentoBanho);
+    return this.http.get<RespostaBanho[]>(`${this.api+"/listarBanhoAnimalStatusPagamento?"+httpParams}`);
+  }
+
+  public listCustomStatusPagamento(statusPagamentoBanho: string):Observable<RespostaBanho[]>{
+    const httpParams = new HttpParams()
+    .set("statusPagamentoBanho", statusPagamentoBanho);
+    return this.http.get<RespostaBanho[]>(`${this.api+"/listarBanhoStatusPagamento?"+httpParams}`);
+  }
+
+  public listCustomData(data: string):Observable<RespostaBanho[]>{
+    const httpParams = new HttpParams()
+    .set("data", data);
+    return this.http.get<RespostaBanho[]>(`${this.api+"/listarBanhoData?"+httpParams}`);
+  }
+
+  public listCustomBanhoInativo():Observable<RespostaBanho[]>{
+    return this.http.get<RespostaBanho[]>(`${this.api+"/listarBanhoInativo"}`);
+  }
+
   public save(banho: RequisicaoBanho):Observable<RespostaBanho> {
     if(banho.id){
       return this.update(banho);
@@ -34,6 +57,10 @@ export class BanhoTosaService {
 
   private update(banho: RequisicaoBanho): Observable<RespostaBanho>{
     return this.http.put<RespostaBanho>(`${this.api}`, banho);
+  }
+
+  public atualizaStatusBanho(id: number, statusBanho: string): Observable<any> {
+    return this.http.patch<any>(`${this.api}/statusBanho/${id}`, statusBanho);
   }
 
   public delete(id: number): Observable<RespostaBanho> {

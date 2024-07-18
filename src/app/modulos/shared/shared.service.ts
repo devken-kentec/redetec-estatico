@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { ComboBoxRaca } from '../../domain/raca.domain';
-import { ComboBoxHumano } from '../../domain/humano-domain';
+import { ComboBoxHumano } from '../../domain/humano.domain';
 import { ComboBoxAnimal } from '../../domain/animal.domain';
 import { ComboBoxTipoBanhoTosa } from '../../domain/tipo-banho-tosa.domain';
 
@@ -75,5 +75,25 @@ export class SharedService {
     }
     horaCompleta = hora + ":" + minuto;
     return horaCompleta;
+  }
+
+
+  primeiroDia(dataInicial: string){
+    let monName = new Array ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+    let now = new Date();
+    if(dataInicial == ""){
+      dataInicial = now.getFullYear()+"-"+monName[now.getMonth()] + "-" + "01";
+    }
+    return dataInicial;
+  }
+
+  ultimoDia(dataFinal: string){
+    let monName = new Array ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+    let endDay = new Array ("31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "30");
+    let now = new Date();
+    if(dataFinal == ""){
+      dataFinal = now.getFullYear() +"-"+monName[now.getMonth()]+"-"+endDay[now.getMonth()];
+    }
+    return dataFinal;
   }
 }

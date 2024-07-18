@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ModalFormComponent } from '../../modal/modal-form/modal-form.component';
 import { HumanoService } from '../shared/humano.service';
 import { SharedService } from '../../shared/shared.service';
-import { RespostaHumano } from '../../../domain/humano-domain';
+import { RespostaHumano } from '../../../domain/humano.domain';
 import { take } from 'rxjs';
 
 @Component({

@@ -2,47 +2,117 @@ import { Component, inject } from '@angular/core';
 import { BanhoTosaService } from '../shared/banho-tosa.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SharedService } from '../../shared/shared.service';
-import { RespostaBanho } from '../../../domain/banho.domain';
+import { RequisicaoBanho, RespostaBanho } from '../../../domain/banho.domain';
 import { take } from 'rxjs';
 import { ModalFormComponent } from '../../modal/modal-form/modal-form.component';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComboBoxAnimal } from '../../../domain/animal.domain';
+import { ComboBoxTipoBanhoTosa } from '../../../domain/tipo-banho-tosa.domain';
+import { ComboBoxHumano } from '../../../domain/humano.domain';
 
 @Component({
   selector: 'app-banho-tosa-list',
   standalone: true,
-  imports: [RouterModule, ModalFormComponent],
+  imports: [
+      RouterModule,
+      ModalFormComponent,
+      ReactiveFormsModule,
+      FormsModule],
   templateUrl: './banho-tosa-list.component.html',
   styleUrl: './banho-tosa-list.component.css',
   preserveWhitespaces: true
 })
 export class BanhoTosaListComponent {
+  private fb = inject(FormBuilder);
   private banhoTosaService = inject(BanhoTosaService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   public sharedService = inject(SharedService);
 
+  banhoTosaForm!: FormGroup;
   listaBanhoTosa: RespostaBanho[] = [];
   banhoTosa!: RespostaBanho;
   registroDeletado: boolean = true;
+  mostrarFiltro: boolean = false;
+  selectAnimal: ComboBoxAnimal[] = [];
+  selectHumano: ComboBoxHumano[] = [];
+  requisicao!: RequisicaoBanho;
+
+  constructor(){
+    this.banhoTosaForm = this.fb.group({
+      id: [null],
+      inicio: [''],
+      statusBanhoTosa: [''],
+      status: [''],
+      termino: [''],
+      observacao: [''],
+      animal: [''],
+      tipoBanhoTosa: [''],
+      statusPagamentoBanho: [''],
+      transporte: [''],
+      buscar: [''],
+      entregar: [''],
+      desconto: [''],
+    });
+  }
 
   ngOnInit(): void {
     this.listarAnimal();
+    this.comboBox();
   }
 
   public listarAnimal(){
-    this.banhoTosaService.list().subscribe((res: RespostaBanho[])=>{
+    this.banhoTosaService.list().pipe(take(1)).subscribe((res: RespostaBanho[])=>{
         this.listaBanhoTosa = res
     });
   }
 
-  public editar(id: number | undefined){
+  public filtrarBanhoAnimalStatusPagamento(){
+      let animal = this.banhoTosaForm.get('animal')?.value;
+      let statusPagamentoBanho = this.banhoTosaForm.get('statusPagamentoBanho')?.value;
+
+    this.banhoTosaService.listCustomAnimalStatusPagamento(animal, statusPagamentoBanho).pipe(take(1)).subscribe((res: RespostaBanho[])=>{
+      this.listaBanhoTosa = res
+    });
+  }
+
+  public filtrarBanhoData(){
+    let inicio = this.banhoTosaForm.get('inicio')?.value;
+    this.banhoTosaService.listCustomData(inicio).pipe(take(1)).subscribe((res: RespostaBanho[])=>{
+    this.listaBanhoTosa = res
+  });
+ }
+
+ public filtrarBanhoStatusPagamento(){
+  let statusPagamentoBanho = this.banhoTosaForm.get('statusPagamentoBanho')?.value;
+  this.banhoTosaService.listCustomStatusPagamento(statusPagamentoBanho).pipe(take(1)).subscribe((res: RespostaBanho[])=>{
+    this.listaBanhoTosa = res
+  });
+}
+
+ public filtrarBanhoStatusInativo(){
+  this.banhoTosaService.listCustomBanhoInativo().pipe(take(1)).subscribe((res: RespostaBanho[])=>{
+    this.listaBanhoTosa = res
+  });
+}
+
+  public mostrarFiltroData():void {
+    this.mostrarFiltro = !this.mostrarFiltro;
+  }
+
+  public editar(id: number | undefined):void {
     this.router.navigate(["edit", id], { relativeTo: this.route });
+  }
+
+  public fecharPagamento(id: number | undefined){
+    this.router.navigate(["finish", id, true], { relativeTo: this.route });
   }
 
   public recuperarDados(lista: RespostaBanho): RespostaBanho {
     return this.banhoTosa = lista;
   }
 
-  public excluirRegistro(id: number){
+  public excluirRegistro(id: number):void {
     this.banhoTosaService.delete(id)
     .pipe(take(1))
     .subscribe({
@@ -57,4 +127,18 @@ export class BanhoTosaListComponent {
       },
     });
   }
+
+  public comboBox(){
+    this.sharedService.comboBoxAnimal().pipe(
+      take(1)
+    ).subscribe((res: ComboBoxAnimal[])=>{
+        this.selectAnimal = res
+    });
+
+    this.sharedService.comboBoxHumano().pipe(
+      take(1)
+    ).subscribe((res: ComboBoxHumano[])=>{
+        this.selectHumano = res
+    });
+   }
 }

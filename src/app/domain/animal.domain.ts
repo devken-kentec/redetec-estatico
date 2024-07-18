@@ -1,4 +1,4 @@
-import { RespostaHumano } from "./humano-domain";
+import { RespostaHumano } from "./humano.domain";
 
 export interface RequisicaoAnimal {
   id: number;

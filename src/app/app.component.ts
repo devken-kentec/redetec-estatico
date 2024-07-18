@@ -21,4 +21,30 @@ export class AppComponent {
     this.appVersion = packageJson.version;
     this.router.navigate(['/home']);
   }
+
+  public navegarPara(onde: string){
+    if(onde === 'humano'){
+      this.router.navigate(['humano']);
+    }
+
+    if(onde === 'raca'){
+      this.router.navigate(['raca']);
+    }
+
+    if(onde === 'animal'){
+      this.router.navigate(['animal']);
+    }
+
+    if(onde === 'tipoBanho'){
+      this.router.navigate(['tipo-banho']);
+    }
+
+    if(onde === 'banhoTosa'){
+      this.router.navigate(['banho']);
+    }
+
+    if(onde == 'statusBanho'){
+      this.router.navigate(['banho/status/banho']);
+    }
+  }
 }

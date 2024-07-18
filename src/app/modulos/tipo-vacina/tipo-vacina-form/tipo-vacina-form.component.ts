@@ -30,7 +30,7 @@ export class TipoVacinaFormComponent {
       id: [ null ],
       descricao: [''],
       valor:[''],
-      status: ['']
+      status: ['Ativo']
     });
     this.preencherFormulario();
   }
@@ -68,6 +68,7 @@ export class TipoVacinaFormComponent {
          },
      });
    }
+   form.reset();
  }
 
 }
