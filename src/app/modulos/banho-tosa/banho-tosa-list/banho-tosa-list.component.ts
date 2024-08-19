@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { ComboBoxAnimal } from '../../../domain/animal.domain';
 import { ComboBoxTipoBanhoTosa } from '../../../domain/tipo-banho-tosa.domain';
 import { ComboBoxHumano } from '../../../domain/humano.domain';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-banho-tosa-list',
@@ -17,7 +18,9 @@ import { ComboBoxHumano } from '../../../domain/humano.domain';
       RouterModule,
       ModalFormComponent,
       ReactiveFormsModule,
-      FormsModule],
+      FormsModule,
+      NgxMaskDirective,
+      NgxMaskPipe],
   templateUrl: './banho-tosa-list.component.html',
   styleUrl: './banho-tosa-list.component.css',
   preserveWhitespaces: true
@@ -37,6 +40,7 @@ export class BanhoTosaListComponent {
   selectAnimal: ComboBoxAnimal[] = [];
   selectHumano: ComboBoxHumano[] = [];
   requisicao!: RequisicaoBanho;
+  carregando: boolean = false;
 
   constructor(){
     this.banhoTosaForm = this.fb.group({
@@ -63,7 +67,8 @@ export class BanhoTosaListComponent {
 
   public listarAnimal(){
     this.banhoTosaService.list().pipe(take(1)).subscribe((res: RespostaBanho[])=>{
-        this.listaBanhoTosa = res
+        this.listaBanhoTosa = res;
+        this.carregando = true;
     });
   }
 
@@ -141,4 +146,9 @@ export class BanhoTosaListComponent {
         this.selectHumano = res
     });
    }
+
+   vincularWhatsApp(whatsapp: string, animal: string): string {
+    let chamar = "https://wa.me/550"+whatsapp+"?text=Aqui é da KasaPet informamos que " + animal +" está pronto!";
+    return chamar;
+  }
 }

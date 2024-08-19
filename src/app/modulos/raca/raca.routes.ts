@@ -1,6 +1,7 @@
 import { RacaFormComponent } from './raca-form/raca-form.component';
 import { Routes } from '@angular/router';
 import { RacaListComponent } from './raca-list/raca-list.component';
+import { canActivateGuard } from '../guards/can-activate.guard';
 
 export const racaHoutes: Routes = [
   // { path: '', title: 'Listagem de Raças', component: RacaListComponent},

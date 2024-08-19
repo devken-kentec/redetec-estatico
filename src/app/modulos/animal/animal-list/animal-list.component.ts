@@ -5,11 +5,17 @@ import { AnimalService } from '../shared/animal.service';
 import { SharedService } from '../../shared/shared.service';
 import { RespostaAnimal } from '../../../domain/animal.domain';
 import { take } from 'rxjs';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-animal-list',
   standalone: true,
-  imports: [RouterModule, ModalFormComponent],
+  imports: [
+    RouterModule,
+    ModalFormComponent,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
   templateUrl: './animal-list.component.html',
   styleUrl: './animal-list.component.css',
   preserveWhitespaces: true
@@ -23,6 +29,7 @@ export class AnimalListComponent {
   listaAnimal: RespostaAnimal[] = [];
   animal!: RespostaAnimal;
   registroDeletado: boolean = true;
+  carregando: boolean = false;
 
   ngOnInit(): void {
     this.listarAnimal();
@@ -31,6 +38,7 @@ export class AnimalListComponent {
   public listarAnimal(){
     this.animalService.list().subscribe((res: RespostaAnimal[])=>{
         this.listaAnimal = res
+        this.carregando = true;
     });
   }
 

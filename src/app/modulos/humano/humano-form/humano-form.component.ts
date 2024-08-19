@@ -6,6 +6,7 @@ import { HumanoService } from '../shared/humano.service';
 import { SharedService } from '../../shared/shared.service';
 import { RequisicaoHumano, RespostaHumano } from '../../../domain/humano.domain';
 import { take } from 'rxjs';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-humano-form',
@@ -14,7 +15,9 @@ import { take } from 'rxjs';
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   templateUrl: './humano-form.component.html',
   styleUrl: './humano-form.component.css',

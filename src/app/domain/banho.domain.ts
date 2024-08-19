@@ -25,6 +25,7 @@ export interface RespostaBanho {
 	tipoBanhoTosa: number;
   animalNome: string;
   animalHumano: string;
+  zap: string;
   tipoBanhoDescricao: string;
 	tipoBanhoValor: number;
   statusPagamentoBanho: string;

@@ -1,74 +1,136 @@
 <nav class="navbar orange fixed-top">
   <div class="row col-12">
       <div class="col-12 col-lg-3 col-xl-3 d-flex align-items-center">
-        <button type="button" class="navbar-toggler d-lg-none d-xl-none" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <img src="assets/hamburger.gif" alt="Menu" class="hamburger">
-        </button>
+        @if(mostrarMenu){
+          <button type="button" class="navbar-toggler d-lg-none d-xl-none" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <img src="assets/hamburger.gif" alt="Menu" class="hamburger">
+          </button>
+        }
           <a href="#" class="navbar-brand" class="logo">
-            <img src="assets/logo_new.png" alt="kasapet" width="60">
+            <img src="assets/logo_pet_2.png" alt="kasapet" width="60" style="border-radius: 100%;">
           </a>
       </div>
       <div class="col col-lg-9 col-xl-9 barra d-flex align-items-center justify-content-end">
-        <ul class="list-unstyled d-none d-lg-flex d-xl-flex">
-          <li class="nav-item">
-              <a routerLink="/humano" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Humano</a>
-          </li>
-          <li class="nav-item">
-              <a routerLink="/animal" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Animal</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/banho" data-toggle="collapse" href="#collapseMenu" class="nav-link">Banho e Tosa</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="banho/status/banho" data-toggle="collapse" href="#collapseMenu" class="nav-link">Status Banho</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/vacina" data-toggle="collapse" href="#collapseMenu" class="nav-link">Vacinas</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/home" data-toggle="collapse" href="#collapseMenu" class="nav-link">+ Opções</a>
-          </li>
-        </ul>
+        @if(mostrarMenu){
+          <ul class="list-unstyled d-none d-lg-flex d-xl-flex">
+            @if(humano){
+              <li class="nav-item">
+                <a routerLink="/humano" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Humano</a>
+              </li>
+            }
+            @if(animal){
+              <li class="nav-item">
+                <a routerLink="/animal" data-toggle="collapse" href="#collapseMenu" class="nav-link active">Animal</a>
+              </li>
+            }
+            @if(banho){
+              <li class="nav-item">
+                <a routerLink="/banho" data-toggle="collapse" href="#collapseMenu" class="nav-link">Banho e Tosa</a>
+              </li>
+            }
+            @if(statusBanho){
+              <li class="nav-item">
+                <a routerLink="banho/status/banho" data-toggle="collapse" href="#collapseMenu" class="nav-link">Status Banho</a>
+              </li>
+            }
+            @if(vacina){
+              <li class="nav-item">
+                <a routerLink="/vacina" data-toggle="collapse" href="#collapseMenu" class="nav-link">Vacinas</a>
+              </li>
+            }
+            @if(outros){
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">+ Opções</a>
+                <div class="dropdown-menu">
+                  @if(raca){
+                    <a class="dropdown-item" routerLink="/raca">Raça</a>
+                  }
+                  @if(tipoBanho){
+                    <a class="dropdown-item" routerLink="/tipo-banho">Tipo Banho</a>
+                  }
+                  @if(tipoVacina){
+                    <a class="dropdown-item" routerLink="/tipo-vacina">Tipo Vacina</a>
+                  }
+                  @if(config){
+                      <a  class="dropdown-item" routerLink="/config">configurações</a>
+                  }
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" (click)="sair()">Sair</a>
+                </div>
+              </li>
+            }
+          </ul>
+        }
+
       </div>
   </div>
 </nav>
 <div class="collapse menu d-lg-none d-xl-none bg-light" id="collapseMenu">
   <ul class="list-unstyled">
-    <li class="nav-item">
+    @if(humano){
+      <li class="nav-item">
         <a data-toggle="collapse" (click)="navegarPara('humano')" href="#collapseMenu"  class="nav-link">HUMANO</a>
-    </li>
-    <li class="nav-item">
-      <a data-toggle="collapse" (click)="navegarPara('raca')" href="#collapseMenu"  class="nav-link">RAÇA</a>
-  </li>
-    <li class="nav-item">
+      </li>
+    }
+    @if(animal){
+      <li class="nav-item">
         <a data-toggle="collapse" (click)="navegarPara('animal')" href="#collapseMenu"  class="nav-link">ANIMAL</a>
-    </li>
-    <li class="nav-item">
-      <a data-toggle="collapse" (click)="navegarPara('tipoBanho')" href="#collapseMenu" class="nav-link">TIPO BANHO</a>
-    </li>
-    <li class="nav-item">
-      <a data-toggle="collapse" (click)="navegarPara('banhoTosa')" href="#collapseMenu" class="nav-link">BANHO É TOSA</a>
-    </li>
-    <li class="nav-item">
+      </li>
+    }
+    @if(banho){
+      <li class="nav-item">
+        <a data-toggle="collapse" (click)="navegarPara('banhoTosa')" href="#collapseMenu" class="nav-link">BANHO É TOSA</a>
+      </li>
+    }
+    @if(statusBanho){
+      <li class="nav-item">
         <a data-toggle="collapse" (click)="navegarPara('statusBanho')" href="#collapseMenu" class="nav-link">STATUS BANHO</a>
-    </li>
-    <li class="nav-item">
-      <a data-toggle="collapse" (click)="navegarPara('tipoVacina')" href="#collapseMenu" class="nav-link">TIPO VACINA</a>
-    </li>
-    <li class="nav-item">
+      </li>
+    }
+    @if(vacina){
+      <li class="nav-item">
         <a data-toggle="collapse" (click)="navegarPara('vacina')" href="#collapseMenu" class="nav-link">VACINAS</a>
+      </li>
+    }
+    @if(raca){
+      <li class="nav-item">
+        <a data-toggle="collapse" (click)="navegarPara('raca')" href="#collapseMenu"  class="nav-link">RAÇA</a>
+      </li>
+    }
+    @if(tipoBanho){
+      <li class="nav-item">
+        <a data-toggle="collapse" (click)="navegarPara('tipoBanho')" href="#collapseMenu" class="nav-link">TIPO BANHO</a>
+      </li>
+    }
+    @if(tipoVacina){
+      <li class="nav-item">
+        <a data-toggle="collapse" (click)="navegarPara('tipoVacina')" href="#collapseMenu" class="nav-link">TIPO VACINA</a>
+      </li>
+    }
+    @if(config){
+      <li class="nav-item">
+        <a data-toggle="collapse" (click)="navegarPara('config')" href="#collapseMenu" class="nav-link">CONFIG</a>
+      </li>
+    }
+    <li class="nav-item">
+      <a data-toggle="collapse" (click)="sair()" href="#collapseMenu" class="nav-link">SAIR</a>
     </li>
   </ul>
 </div>
-@if(url_atual !== 'http://localhost:4200/home'){
-  <div class="container" style="min-height: 900px;">
+<div style="margin-top: 100px;" class="col-12 d-flex justify-content-end">
+  @if(mostrarMenu){
+    <span>Usuário: {{ userName }}</span> &nbsp;&nbsp; <span>Versão: {{ appVersion }}</span>
+  }
+</div>
+@if(url_atual !== '*/login'){
+  <div class="container" style="min-height: 1400px;">
     <router-outlet/>
   </div>
 }
 
-@if(url_atual === 'http://localhost:4200/home'){
+@if(url_atual === '*/login'){
   <div class="container-fluid" style="min-height: 600px;">
-    <app-home/>
+    <app-login-form/>
   </div>
 }
 

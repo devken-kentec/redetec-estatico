@@ -23,6 +23,7 @@ export class TipoVacinaListComponent {
   listaTipoVacina: RespostaTipoVacina[] = [];
   tipoVacina!: RespostaTipoVacina;
   registroDeletado: boolean = true;
+  carregando: boolean = false;
 
   ngOnInit(): void {
     this.listarTipoVacina();
@@ -30,7 +31,8 @@ export class TipoVacinaListComponent {
 
   public listarTipoVacina(){
     this.tipoVacinaService.list().subscribe((res: RespostaTipoVacina[])=>{
-        this.listaTipoVacina = res
+        this.listaTipoVacina = res;
+        this.carregando = true;
     });
   }
 

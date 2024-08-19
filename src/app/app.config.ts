@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { provideNgxMask } from 'ngx-mask';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -15,6 +16,8 @@ export const appConfig: ApplicationConfig = {
                 progressBar: true,
                 progressAnimation: 'increasing'
               }),
+              provideNgxMask(),
               { provide: LOCALE_ID, useValue: 'pt-br'}
+
   ]
 };

@@ -1,4 +1,4 @@
-<div class="col-md-12" style="margin-top: 180px;">
+<div class="col-md-12" style="margin-top: 50px;">
   <nav>
     <ol class="breadcrumb bg-white">
       <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
@@ -17,49 +17,53 @@
       </button>
     </div>
   </div>
-  <div id="table" class="table-responsive" style="max-height: 700px;">
-    <table class="table table-borderless">
-      <thead>
-        <tr class="bg-dark text-light">
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Humano</th>
-          <th>Fone</th>
-          <th>Whatspp</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody style="max-height: 50px;">
-        @for(lista of listaAnimal; track lista.id; let i = $index){
-        <tr>
-          <td>{{ lista.id }}</td>
-          <td>{{ lista.nome }}</td>
-          <td>{{ lista.humanoCompleto}}</td>
-          <td>{{ lista.contatoFone }}</td>
-          <td>{{ lista.contatoZap }}</td>
-          <td>{{ lista.status }}</td>
-          <td>
-            <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
-            @if(lista.id > 0){
-              <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
-            }
-
-          </td>
-        </tr>
-      } @empty {
-        <div class="d-flex justify-content-center mt-3 ml-5">
-          <div class="alert alert-warning" style="width: 800px;" role="alert">
-            A lista de Humanos esta vazia!
-          </div>
-        </div>
-      }
-      </tbody>
-    </table>
-  </div>
-    @if(animal){
-      <div>
-        <app-modal-form [entrada]="animal" (emitirEvento)="excluirRegistro($event)"/>
+  @defer (when carregando){
+    <div id="table" class="table-responsive" style="max-height: 700px;">
+      <table class="table table-borderless">
+        <thead>
+          <tr class="bg-dark text-light">
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Humano</th>
+            <th>Fone</th>
+            <th>Whatspp</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody style="max-height: 50px;">
+          @for(lista of listaAnimal; track lista.id; let i = $index){
+          <tr>
+            <td>{{ lista.id }}</td>
+            <td>{{ lista.nome }}</td>
+            <td>{{ lista.humanoCompleto}}</td>
+            <td><a [href]="'tel:+'+'lista.fone'">{{ lista.contatoFone | mask:'(00) 0000-0000' }}</a></td>
+            <td>{{ lista.contatoZap }}</td>
+            <td>{{ lista.status }}</td>
+            <td>
+              <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
+              @if(lista.id > 0){
+                <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
+              }
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  } @placeholder {
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary mt-4" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
-    }
+    </div>
+  } @loading {
+    <p>Carregando a Lista de Animais...</p>
+  }
+
+  @if(animal){
+    <div>
+      <app-modal-form [entrada]="animal" (emitirEvento)="excluirRegistro($event)"/>
+    </div>
+  }
 </div>

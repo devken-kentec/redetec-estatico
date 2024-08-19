@@ -20,6 +20,7 @@ export class BanhoTosaStatusListComponent {
   alteraStatusBanho: string = '';
   novoStatusBanho: string = '';
   objBanhoTosa!: RespostaBanho;
+  carregando: boolean = false;
 
   constructor(){
     this.listarBanhoAnimal();
@@ -27,7 +28,8 @@ export class BanhoTosaStatusListComponent {
 
   public listarBanhoAnimal(){
     this.banhoTosaService.list().pipe(take(1)).subscribe((res: RespostaBanho[])=>{
-        this.listaBanhoTosa = res
+        this.listaBanhoTosa = res;
+        this.carregando = true;
     });
   }
 
@@ -35,18 +37,12 @@ export class BanhoTosaStatusListComponent {
     this.alteraStatusBanho = lista.statusBanhoTosa
     this.objBanhoTosa = lista;
 
-    console.log(this.objBanhoTosa.id);
-    console.log(this.alteraStatusBanho);
     if(this.alteraStatusBanho === 'Em espera'){
       this.novoStatusBanho = 'Banho';
-
-      console.log(this.novoStatusBanho);
     } else if(this.alteraStatusBanho === 'Banho'){
       this.novoStatusBanho = 'Finalizado';
-      console.log(this.novoStatusBanho);
     } else {
       this.novoStatusBanho = 'enviarEmail';
-      console.log(this.novoStatusBanho);
     }
   }
 
@@ -58,5 +54,15 @@ export class BanhoTosaStatusListComponent {
        console.log(res);
        this.listarBanhoAnimal();
     });
+  }
+
+  public mudarCor(recebeCor: string): string {
+    let cor = '';
+    if(recebeCor === 'Banho'){
+        cor = 'Blue';
+    } else if(recebeCor === 'Finalizado'){
+        cor = 'Green';
+    }
+    return cor;
   }
 }

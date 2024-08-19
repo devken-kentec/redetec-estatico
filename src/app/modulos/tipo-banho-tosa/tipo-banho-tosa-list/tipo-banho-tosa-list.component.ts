@@ -23,6 +23,7 @@ export class TipoBanhoTosaListComponent implements OnInit {
   listaTipoBanhoTosa: RespostaTipoBanhoTosa[] = [];
   tipoBanhoTosa!: RespostaTipoBanhoTosa;
   registroDeletado: boolean = true;
+  carregando: boolean = false;
 
   ngOnInit(): void {
     this.listarTipoBanhoTosa();
@@ -30,7 +31,8 @@ export class TipoBanhoTosaListComponent implements OnInit {
 
   public listarTipoBanhoTosa(){
     this.tipoBanhoTosaService.list().subscribe((res: RespostaTipoBanhoTosa[])=>{
-        this.listaTipoBanhoTosa = res
+        this.listaTipoBanhoTosa = res;
+        this.carregando = true;
     });
   }
 

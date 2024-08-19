@@ -1,0 +1,140 @@
+<div class="col-12 d-flex justify-content-center" style="margin-top: 100px;">
+
+</div>
+<div class="col-12 d-flex justify-content-center mt-5">
+  <div class="card">
+    <h5 class="card-header text-center">KASA PET CLOUD</h5>
+    <div class="card-body">
+      <form class="needs-validation" novalidate [formGroup]="loginForm">
+        <div class="form-row col-md-12">
+          <div class="form-group col-md-12 ">
+            <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control form-control-sm"
+                id="email"
+                formControlName="email"
+                />
+          </div>
+        </div>
+        <div class="form-row col-md-12">
+          <div class="form-group col-md-12">
+            <label for="senha">Senha:</label>
+            <input
+              type="password"
+              class="form-control form-control-sm"
+              id="senha"
+              formControlName="senha"
+              />
+          </div>
+        </div>
+        <div class="form-row col-md-12">
+          <button type="button" class="btn btn-success col-12" (click)="fazerLogin()">
+            LOGAR
+          </button>
+        </div>
+        <div class="form-row col-md-12 mt-2 d-flex justify-content-center">
+          <a type="button" class="stretched-link" data-toggle="modal" data-target="#exampleModal">
+            Esqueci ou Alterar Senha
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Gerenciar Senhas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" novalidate [formGroup]="loginForm">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="gerenciarSenha" name="gerenciarSenha" id="inlineRadio1" value="recuperar">
+            <label class="form-check-label" for="inlineRadio1">Recuperar Senha</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="gerenciarSenha" name="gerenciarSenha" id="inlineRadio2" value="alterar">
+            <label class="form-check-label" for="inlineRadio2">Alterar Senha</label>
+          </div>
+          @if(loginForm.get('gerenciarSenha')?.value === "recuperar"){
+            <div class="form-row col-md-12">
+              <div class="form-group col-md-12 ">
+                <label for="email">Digite seu Email de login para recuperar a senha</label>
+                  <input
+                    type="email"
+                    class="form-control form-control-sm"
+                    id="email"
+                    formControlName="email"
+                    />
+              </div>
+            </div>
+          }
+
+          @if(loginForm.get('gerenciarSenha')?.value === "alterar"){
+            <div class="form-row col-md-12">
+              <div class="form-group col-md-12 ">
+                <label for="email">Email:</label>
+                  <input
+                    type="email"
+                    class="form-control form-control-sm"
+                    id="email"
+                    formControlName="email"
+                    />
+              </div>
+            </div>
+            <div class="form-row col-md-12">
+              <div class="form-group col-md-12">
+                <label for="senhaAtu">Senha Atual:</label>
+                <input
+                  type="password"
+                  class="form-control form-control-sm"
+                  id="senhaAtu"
+                  formControlName="senha"
+                  />
+              </div>
+            </div>
+            <div class="form-row col-md-12">
+              <div class="form-group col-md-10">
+                <label for="senhaN">Nova Senha:</label>
+                <input
+                  type="password"
+                  class="form-control form-control-sm"
+                  id="senhaN"
+                  formControlName="novaSenha"
+                  />
+              </div>
+              @if(loginForm.get('novaSenha')?.status === 'VALID'){
+                <div style="margin-top: 35px;" class="text-success"><i class="fa fa-check" aria-hidden="true"></i></div>
+              }
+
+            </div>
+            <div class="form-row col-md-12">
+              <div class="form-group col-md-10">
+                <label for="senhaR">Repetir Senha:</label>
+                <input
+                  type="password"
+                  class="form-control form-control-sm"
+                  id="senhaR"
+                  formControlName="repetirSenha"
+                  (input)="validarSenha()"
+                  />
+              </div>
+              @if(verificaNovaSenha){
+                <div style="margin-top: 35px;" class="text-success"><i class="fa fa-check" aria-hidden="true"></i></div>
+              }
+            </div>
+          }
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="salvarSenha()">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
