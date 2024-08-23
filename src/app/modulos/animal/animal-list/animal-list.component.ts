@@ -6,6 +6,7 @@ import { SharedService } from '../../shared/shared.service';
 import { RespostaAnimal } from '../../../domain/animal.domain';
 import { take } from 'rxjs';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-animal-list',
@@ -14,7 +15,9 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     RouterModule,
     ModalFormComponent,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './animal-list.component.html',
   styleUrl: './animal-list.component.css',
@@ -25,14 +28,36 @@ export class AnimalListComponent {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private sharedService = inject(SharedService);
+  private fb = inject(FormBuilder);
 
   listaAnimal: RespostaAnimal[] = [];
   animal!: RespostaAnimal;
   registroDeletado: boolean = true;
   carregando: boolean = false;
+  paginaForm: FormGroup;
+  totalElements = 0;
+  totalPages = 0;
+  pagina = 0;
+  tamanho = 5;
+  pesquisa: string = '';
+  ativaCampoPesquisa: boolean = false;
+
+  constructor(){
+    this.paginaForm = this.fb.group({
+      quantPag: [ 5 ]
+    });
+  }
 
   ngOnInit(): void {
-    this.listarAnimal();
+    //this.listarAnimal();
+    this.totalListaAnimal();
+    this.listarAnimalPaginada(this.pagina, this.tamanho);
+  }
+
+  public totalListaAnimal(): void {
+    this.animalService.fullList().pipe(take(1)).subscribe((res: number)=>{
+      this.totalElements = res;
+    });
   }
 
   public listarAnimal(){
@@ -40,6 +65,48 @@ export class AnimalListComponent {
         this.listaAnimal = res
         this.carregando = true;
     });
+  }
+
+  public fecharPesquisa(): void {
+    if(this.ativaCampoPesquisa === false){
+      this.ativaCampoPesquisa = !this.ativaCampoPesquisa;
+    } else {
+      this.ativaCampoPesquisa = !this.ativaCampoPesquisa;
+      this.listarAnimalPaginada(this.pagina, this.tamanho);
+      this.pesquisa = "";
+    }
+  }
+
+  public pesquisarHumano() {
+    if(this.pesquisa !== "" && this.pesquisa.length > 0){
+      this.animalService.searchPage(this.pagina, this.tamanho, this.pesquisa).pipe(
+        take(1)
+      ).subscribe((response: RespostaAnimal[])=> {
+          this.listaAnimal = response;
+          this.carregando = true;
+          if(this.totalElements > this.paginaForm.get('quantPag')?.value){
+            this.totalPages = this.totalElements/this.paginaForm.get('quantPag')?.value;
+          } else {
+            this.totalPages = 1;
+          }
+        }
+      );
+    }
+  }
+
+  public listarAnimalPaginada(page: number, size: number){
+    this.animalService.listPage(page, size).pipe(
+      take(1)
+    ).subscribe((response: RespostaAnimal[])=> {
+        this.listaAnimal = response;
+        this.carregando = true;
+        if(this.totalElements > this.paginaForm.get('quantPag')?.value){
+          this.totalPages = this.totalElements/this.paginaForm.get('quantPag')?.value;
+        } else {
+          this.totalPages = 1;
+        }
+      }
+    );
   }
 
   public editar(id: number | undefined){
@@ -64,5 +131,26 @@ export class AnimalListComponent {
         this.sharedService.warningShow("Ops! Algo Errado!!", "Verifique o Console!")
       },
     });
+  }
+
+  public paginaMenor(): void {
+    if(this.pagina <= 0){
+      this.pagina = 0;
+    } else {
+      this.pagina = this.pagina - 1;
+    }
+    this.listarAnimalPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
+  }
+
+  public paginaMaior(): void {
+    if(this.totalPages > 1){
+      this.pagina = this.pagina + 1;
+      this.listarAnimalPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
+    }
+  }
+
+  public atualizaPagina(): void {
+    this.pagina = 0
+    this.listarAnimalPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
   }
 }

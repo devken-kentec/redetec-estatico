@@ -35,10 +35,10 @@ export class BanhoTosaFormComponent {
   selectTipoBanhoTosa: ComboBoxTipoBanhoTosa[] = [];
   moduloPagamento:boolean = false;
   tituloBanho!: string;
-  valorBanho!: number;
+  valorBanho?: number;
   transporteAnimal!: number;
   totalBanho!: number;
-  totalBanhoDesconto: number = 0.0;
+  totalBanhoDesconto?: number = 0.0;
   animalNome!: string;
   animalHumano!: string;
   inicio!: string;
@@ -49,7 +49,10 @@ export class BanhoTosaFormComponent {
   adicionarDesconto: boolean = false;
 
   constructor() {
-    this.comboBox();
+    if(this.moduloPagamento === false){
+      this.comboBox();
+    }
+
     this.banhoTosaForm = this.fb.group({
       id: [null],
       inicio: [''],
@@ -65,6 +68,7 @@ export class BanhoTosaFormComponent {
       entregar: [''],
       desconto: [''],
     });
+
     this.preencherFormulario();
   }
 
@@ -126,6 +130,10 @@ export class BanhoTosaFormComponent {
     let valorViagem = this.verificarTransporte(form.get('buscar')?.value, form.get('entregar')?.value);
     form.get('empresa')?.setValue(1);
     form.get('transporte')?.setValue(valorViagem);
+    if(form.get('desconto')?.value === '' || form.get('desconto')?.value === null){
+      form.get('desconto')?.setValue('0.00');
+    }
+
     if(this.moduloPagamento){
       this.banhoTosaForm.get('statusPagamentoBanho')?.setValue('Pago');
       this.statusPagamentoBanho = this.banhoTosaForm.get('statusPagamentoBanho')?.value;

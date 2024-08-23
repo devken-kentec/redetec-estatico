@@ -15,8 +15,24 @@
       <button routerLink="new" class="btn btn-primary float-right">
         <i class="fas fa-user-plus"></i> Cadastrar Humano
       </button>
+      <button class="btn btn-success float-right mr-1" (click)="fecharPesquisa()">🔎</button>
     </div>
   </div>
+  @if(ativaCampoPesquisa){
+    <div class="form-row col-md-12 d-flex justify-content-center">
+      <div class="form-group col-md-6">
+        <input
+          placeholder="Faça sua Pesquisa Aqui"
+          type="text"
+          class="form-control"
+          id="id"
+          [(ngModel)]="pesquisa"
+          (input)="pesquisarHumano()"
+          autocomplete="off"
+          />
+      </div>
+    </div>
+  }
   @defer (when carregando){
     <div id="table" class="table-responsive">
       <table class="table table-borderless">

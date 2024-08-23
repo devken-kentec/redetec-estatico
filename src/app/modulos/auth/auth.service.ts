@@ -11,15 +11,14 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private readonly api = `${environment.api}/rede-tecnologia/api/AutenticaoBeta/v1`;
-  //private tokenHeader: string =  environment.TOKEN;
-  private tokenHeader: string | any;
+  private tokenHeader: string =  environment.TOKEN;
+  //private tokenHeader: string | any;
   private http = inject(HttpClient);
 
   constructor() {
-    if(localStorage.getItem("TOKEN") != null){
-      this.tokenHeader = localStorage.getItem("TOKEN");
-    }
-
+    // if(localStorage.getItem("TOKEN") != null){
+    //   this.tokenHeader = localStorage.getItem("TOKEN");
+    // }
   }
 
   public autenticarUsuario(login: RequisicaoLogin): Observable<RespostaLogin> {

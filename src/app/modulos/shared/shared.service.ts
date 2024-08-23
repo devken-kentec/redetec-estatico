@@ -47,14 +47,14 @@ export class SharedService {
 
   public formatDate(data: string){
     let dataCompleta = "";
-			 let dia = data.substring(8,10);
-			 let mes = data.substring(5,7);
-       let ano = data.substring(0,4);
+			 let dia = data?.substring(8,10);
+			 let mes = data?.substring(5,7);
+       let ano = data?.substring(0,4);
 
-       if(dia.length == 1){
+       if(dia?.length == 1){
         dia = "0" + dia;
      }
-      if(mes.length == 1){
+      if(mes?.length == 1){
         mes = "0" + mes
       }
      dataCompleta = dia+"/"+mes+"/"+ano
@@ -63,14 +63,14 @@ export class SharedService {
 
   public formatTime(time: string){
     let horaCompleta = "";
-    let hora = time.substring(11,13);
-    let minuto = time.substring(14, 16);
+    let hora = time?.substring(11,13);
+    let minuto = time?.substring(14, 16);
 
-    if(hora.length == 1){
+    if(hora?.length == 1){
       hora = "0" + hora;
     }
 
-    if(minuto.length == 1){
+    if(minuto?.length == 1){
       minuto = "0" + minuto;
     }
     horaCompleta = hora + ":" + minuto;

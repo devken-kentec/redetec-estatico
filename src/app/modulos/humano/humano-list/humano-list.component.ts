@@ -39,6 +39,8 @@ export class HumanoListComponent {
   totalPages = 0;
   pagina = 0;
   tamanho = 5;
+  pesquisa: string = '';
+  ativaCampoPesquisa: boolean = false;
 
   constructor(){
     this.paginaForm = this.fb.group({
@@ -48,11 +50,11 @@ export class HumanoListComponent {
 
   ngOnInit(): void {
     //this.listarHumano();
-    this.totalListahumano();
-    this.listarAgendaPaginada(this.pagina, this.tamanho);
+    this.totalListaHumano();
+    this.listarHumanoPaginada(this.pagina, this.tamanho);
   }
 
-  public totalListahumano(): void {
+  public totalListaHumano(): void {
     this.humanoService.fullList().pipe(take(1)).subscribe((res: number)=>{
       this.totalElements = res;
     });
@@ -65,8 +67,37 @@ export class HumanoListComponent {
     });
   }
 
-  listarAgendaPaginada(page: number, size: number){
-    this.humanoService.listPage(page, size).subscribe((response: RespostaHumano[])=> {
+  public fecharPesquisa(): void {
+    if(this.ativaCampoPesquisa === false){
+      this.ativaCampoPesquisa = !this.ativaCampoPesquisa;
+    } else {
+      this.ativaCampoPesquisa = !this.ativaCampoPesquisa;
+      this.listarHumanoPaginada(this.pagina, this.tamanho);
+      this.pesquisa = "";
+    }
+  }
+
+  public pesquisarHumano() {
+    if(this.pesquisa !== "" && this.pesquisa.length > 0){
+      this.humanoService.searchPage(this.pagina, this.tamanho, this.pesquisa).pipe(
+        take(1)
+      ).subscribe((response: RespostaHumano[])=> {
+          this.listaHumano = response;
+          this.carregando = true;
+          if(this.totalElements > this.paginaForm.get('quantPag')?.value){
+            this.totalPages = this.totalElements/this.paginaForm.get('quantPag')?.value;
+          } else {
+            this.totalPages = 1;
+          }
+        }
+      );
+    }
+  }
+
+  public listarHumanoPaginada(page: number, size: number){
+    this.humanoService.listPage(page, size).pipe(
+      take(1)
+    ).subscribe((response: RespostaHumano[])=> {
         this.listaHumano = response;
         this.carregando = true;
         if(this.totalElements > this.paginaForm.get('quantPag')?.value){
@@ -108,18 +139,18 @@ export class HumanoListComponent {
     } else {
       this.pagina = this.pagina - 1;
     }
-    this.listarAgendaPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
+    this.listarHumanoPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
   }
 
   public paginaMaior(): void {
     if(this.totalPages > 1){
       this.pagina = this.pagina + 1;
-      this.listarAgendaPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
+      this.listarHumanoPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
     }
   }
 
   public atualizaPagina(): void {
     this.pagina = 0
-    this.listarAgendaPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
+    this.listarHumanoPaginada(this.pagina, this.paginaForm.get('quantPag')?.value);
   }
 }

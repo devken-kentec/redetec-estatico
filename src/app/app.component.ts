@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const TOKEN = localStorage.getItem("TOKEN");
+    //const TOKEN = localStorage.getItem("TOKEN");
     this.router.navigate(['/login']);
     this.loginService.xF45A.subscribe({
       next: (res: boolean) => {
@@ -98,12 +98,12 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/login']);
       },
     });
-    if(TOKEN === null || TOKEN === 'null'){
-      let recebeToken = prompt("Informar o TOKEN de acesso!");
-      if(recebeToken != null){
-        localStorage.setItem("TOKEN", recebeToken);
-      }
-    }
+    // if(TOKEN === null || TOKEN === 'null'){
+    //   let recebeToken = prompt("Informar o TOKEN de acesso!");
+    //   if(recebeToken != null){
+    //     localStorage.setItem("TOKEN", recebeToken);
+    //   }
+    // }
   }
 
   public sair(): void {

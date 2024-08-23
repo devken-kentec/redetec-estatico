@@ -1,6 +1,6 @@
 {
   "name": "redetec-estatico",
-  "version": "1.0.0-beta-01",
+  "version": "1.23.8-beta-05",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

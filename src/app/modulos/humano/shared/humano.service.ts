@@ -25,6 +25,11 @@ export class HumanoService {
     return this.http.get<RespostaHumano>(`${this.api}/recuperar/${id}`);
   }
 
+  public searchPage(page: number, size: number, nome: string): Observable<RespostaHumano[]> {
+    const params = new HttpParams().set('page', page).set('size', size).set('nome', nome);
+    return this.http.get<RespostaHumano[]>(`${this.api}/consultaNomePaginacao?${params.toString()}`);
+  }
+
   public listPage(page: number, size: number): Observable<RespostaHumano[]> {
     const params = new HttpParams().set('page', page).set('size', size);
     return this.http.get<RespostaHumano[]>(`${this.api}/consultaPaginacao?${params.toString()}`);

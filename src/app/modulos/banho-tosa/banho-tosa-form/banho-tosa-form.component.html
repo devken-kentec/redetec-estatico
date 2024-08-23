@@ -138,12 +138,12 @@
                         <i class="fas fa-arrow-up" *ngIf="entregar" title="Entregar" style="color: red;"></i>
                     </span>
                   </h5>
-                    <div class="card-text">Valor do Banho: <span style="margin-left: 55px;">{{ valorBanho.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</span></div>
+                    <div class="card-text">Valor do Banho: <span style="margin-left: 55px;">{{ valorBanho?.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</span></div>
                     <div class="card-text" *ngIf="transporteAnimal > 0 || transporteAnimal != null" style="border-bottom: 1px solid red;"><span style="color: blue;">(+)</span> Valor do Transporte: {{ transporteAnimal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</div>
                     <div class="card-text">Total: <span style="margin-left: 130px; font-weight: bold;">{{ totalBanho.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</span></div>
                     @if(adicionarDesconto){
                       <div class="card-text">Desconto: <span style="margin-left: 98px; color: red;">{{ desconto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</span></div>
-                      <div class="card-text">Total com Desconto: <span style="margin-left: 25px;  color: green; font-weight: bold;">{{ totalBanhoDesconto.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</span></div>
+                      <div class="card-text">Total com Desconto: <span style="margin-left: 25px;  color: green; font-weight: bold;">{{ totalBanhoDesconto?.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</span></div>
                     }
                     @if(!adicionarDesconto){
                       <div class="mt-1">
