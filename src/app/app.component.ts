@@ -38,6 +38,9 @@ export class AppComponent implements OnInit {
 
   constructor() {
     this.url_atual = window.location.href;
+    if(this.url_atual === 'https://kasapet.kentec.com.br/login' || this.url_atual === 'http://localhost:4200/login'){
+      this.router.navigate(['https://kasapet.kentec.com.br/']);
+    }
     this.appVersion = packageJson.version;
   }
 
@@ -51,7 +54,6 @@ export class AppComponent implements OnInit {
         this.loginService.X97AI.subscribe(res => this.userId = res);
         this.loginService.x025D.subscribe((res: string[] )=>{
             res.forEach(element => {
-
               if(element === 'DEV'){
                 this.animal = true;
                 this.humano = true;
