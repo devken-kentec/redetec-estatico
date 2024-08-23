@@ -35,7 +35,7 @@ export class RacaFormComponent {
     this.racaForm = this.fb.group({
       id: [ null ],
       descricao: [''],
-      status: ['']
+      status: ['Ativo']
     });
     this.preencherFormulario();
   }
@@ -76,5 +76,6 @@ export class RacaFormComponent {
           },
       });
     }
+    form.reset();
   }
 }

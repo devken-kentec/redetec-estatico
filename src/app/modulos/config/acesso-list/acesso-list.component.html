@@ -1,0 +1,54 @@
+<div class="col-md-12" style="margin-top: 50px;">
+  <nav>
+    <ol class="breadcrumb bg-white">
+      <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
+      <li class="breadcrumb-item active">Listagem</li>
+    </ol>
+  </nav>
+  <div class="row mb-4">
+    <div class="col-md">
+      <h1 class="h5 border-left pl-2">
+        Listagem de Acessos
+      </h1>
+    </div>
+    <div class="col-md">
+      <button routerLink="new" class="btn btn-primary float-right">
+        <i class="fas fa-user-plus"></i> Cadastrar Novo Acesso
+      </button>
+    </div>
+  </div>
+  @defer (when carregando){
+    <div id="table" class="table-responsive">
+      <table class="table table-borderless">
+        <thead>
+          <tr class="bg-dark text-light">
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Acesso</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(lista of listaAcesso; track lista.id; let i = $index){
+          <tr>
+            <td>{{ lista.nome }}</td>
+            <td>{{ lista.sobreNome }}</td>
+            <td>{{ lista.descricao }}</td>
+            <td>
+              <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  } @placeholder {
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary mt-4" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  } @loading {
+    <p>Carregando a Lista de Acessos...</p>
+  }
+</div>

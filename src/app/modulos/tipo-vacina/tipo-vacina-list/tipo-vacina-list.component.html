@@ -1,4 +1,4 @@
-<div class="col-md-12" style="margin-top: 180px;">
+<div class="col-md-12" style="margin-top: 50px;">
     <nav>
       <ol class="breadcrumb bg-white">
         <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
@@ -17,46 +17,49 @@
         </button>
       </div>
     </div>
-    <div id="table" class="table-responsive">
-      <table class="table table-borderless">
-        <thead>
-          <tr class="bg-dark text-light">
-            <th>ID</th>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Status</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for(lista of listaTipoVacina; track lista.id; let i = $index){
-          <tr>
-            <td>{{ lista.id }}</td>
-            <td>{{ lista.descricao }}</td>
-            <td>{{ lista.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</td>
-            <td>{{ lista.status }}</td>
-            <td>
-              <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
-              @if(lista.id > 0){
-                <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
-              }
-  
-            </td>
-          </tr>
-        } @empty {
-          <div class="d-flex justify-content-center mt-3 ml-5">
-            <div class="alert alert-warning" style="width: 800px;" role="alert">
-              A lista de vacina esta vazia!
-            </div>
-          </div>
-        }
-        </tbody>
-      </table>
-    </div>
-      @if(tipoVacina){
-        <div>
-          <app-modal-form [entrada]="tipoVacina" (emitirEvento)="excluirRegistro($event)"/>
+    @defer (when carregando){
+      <div id="table" class="table-responsive">
+        <table class="table table-borderless">
+          <thead>
+            <tr class="bg-dark text-light">
+              <th>ID</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(lista of listaTipoVacina; track lista.id; let i = $index){
+            <tr>
+              <td>{{ lista.id }}</td>
+              <td>{{ lista.descricao }}</td>
+              <td>{{ lista.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}</td>
+              <td>{{ lista.status }}</td>
+              <td>
+                <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
+                @if(lista.id > 0){
+                  <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
+                }
+
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    } @placeholder {
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary mt-4" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
-      }
+      </div>
+    } @loading {
+      <p>Carregando a Lista de Banhos...</p>
+    }
+    @if(tipoVacina){
+      <div>
+        <app-modal-form [entrada]="tipoVacina" (emitirEvento)="excluirRegistro($event)"/>
+      </div>
+    }
   </div>
-  

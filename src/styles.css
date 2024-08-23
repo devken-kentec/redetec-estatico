@@ -112,3 +112,18 @@ div#faixa {
   font-size: 20pt;
   color: #fff;
 }
+
+div.table-responsive {
+  font-size: 10pt;
+  box-shadow: 0px 0px 2px black;
+}
+
+form > div.card {
+  font-size: 10pt;
+  box-shadow: 0px 0px 2px black;
+}
+
+tr > td {
+  padding-top: 10px !important;
+  padding-bottom: 5px !important;
+}

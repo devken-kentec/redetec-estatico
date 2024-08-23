@@ -24,6 +24,7 @@ export class RacaListComponent implements OnInit {
   listaRacas: RespostaRaca[] = [];
   racaRecupeada!: RespostaRaca;
   registroDeletado: boolean = true;
+  carregando: boolean = false;
 
   ngOnInit(): void {
     this.listarRaca();
@@ -31,7 +32,8 @@ export class RacaListComponent implements OnInit {
 
   public listarRaca(){
     this.racaService.list().subscribe((res: RespostaRaca[])=>{
-        this.listaRacas = res
+        this.listaRacas = res;
+        this.carregando = true;
     });
   }
 

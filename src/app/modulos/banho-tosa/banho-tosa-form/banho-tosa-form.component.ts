@@ -27,42 +27,117 @@ export class BanhoTosaFormComponent {
   private fb = inject(FormBuilder);
   private banhoTosaService = inject(BanhoTosaService);
   private route = inject(ActivatedRoute);
-  private sharedService = inject(SharedService);
+  public sharedService = inject(SharedService);
 
   banhoTosaForm: FormGroup;
   requisicao!: RequisicaoBanho;
   selectAnimal: ComboBoxAnimal[] = [];
   selectTipoBanhoTosa: ComboBoxTipoBanhoTosa[] = [];
+  moduloPagamento:boolean = false;
+  tituloBanho!: string;
+  valorBanho?: number;
+  transporteAnimal!: number;
+  totalBanho!: number;
+  totalBanhoDesconto?: number = 0.0;
+  animalNome!: string;
+  animalHumano!: string;
+  inicio!: string;
+  statusPagamentoBanho!: string;
+  buscar!: boolean;
+  entregar!: boolean;
+  desconto: number = 0.0;
+  adicionarDesconto: boolean = false;
 
   constructor() {
-    this.comboBox();
+    if(this.moduloPagamento === false){
+      this.comboBox();
+    }
+
     this.banhoTosaForm = this.fb.group({
       id: [null],
       inicio: [''],
       statusBanhoTosa: [''],
-      status: [''],
+      status: ['Ativo'],
       termino: [''],
       observacao: [''],
       animal: [''],
-      tipoBanhoTosa: ['']
+      tipoBanhoTosa: [''],
+      statusPagamentoBanho: [''],
+      transporte: [''],
+      buscar: [''],
+      entregar: [''],
+      desconto: [''],
     });
+
     this.preencherFormulario();
   }
 
   public preencherFormulario(): void{
     const routeParams = this.route.snapshot.params;
+
     if(routeParams["id"] > 0){
       this.banhoTosaService.loadById(routeParams["id"]).pipe(
         take(1)
       ).subscribe((res: RespostaBanho)=>{
         this.banhoTosaForm.patchValue(res);
+        this.animalNome = res.animalNome;
+        this.animalHumano = res.animalHumano;
+        this.tituloBanho = res.tipoBanhoDescricao;
+        this.valorBanho = res.tipoBanhoValor;
+        this.transporteAnimal = res.transporte;
+        this.totalBanho = this.valorBanho + this.transporteAnimal;
+        this.inicio = res.inicio;
+        this.statusPagamentoBanho = res.statusPagamentoBanho;
+        this.buscar = res.buscar;
+        this.entregar = res.entregar;
+        this.desconto = res.desconto;
       });
     }
+
+    if(routeParams["pagamento"] === 'true'){
+      this.moduloPagamento = true;
+    }
+  }
+
+  public verificarTransporte(buscar: boolean, entregar: boolean): number {
+    let transporte = 0.0;
+    if(entregar === true){
+      transporte = 5.0;
+    }
+
+    if(buscar === true){
+      transporte = 5.0;
+    }
+
+    if(buscar === true && entregar === true){
+      transporte = 10.0;
+    }
+
+    if(buscar === false && entregar === false){
+      transporte = 0.0;
+    }
+    return transporte;
+  }
+
+  public permitirDesconto(){
+    this.adicionarDesconto = !this.adicionarDesconto;
+    this.desconto = this.banhoTosaForm.get('desconto')?.value;
+    this.totalBanhoDesconto = this.totalBanho - this.desconto;
   }
 
   public onSubmit(){
     let form = this.banhoTosaForm;
+    let valorViagem = this.verificarTransporte(form.get('buscar')?.value, form.get('entregar')?.value);
     form.get('empresa')?.setValue(1);
+    form.get('transporte')?.setValue(valorViagem);
+    if(form.get('desconto')?.value === '' || form.get('desconto')?.value === null){
+      form.get('desconto')?.setValue('0.00');
+    }
+
+    if(this.moduloPagamento){
+      this.banhoTosaForm.get('statusPagamentoBanho')?.setValue('Pago');
+      this.statusPagamentoBanho = this.banhoTosaForm.get('statusPagamentoBanho')?.value;
+    }
     this.requisicao = {
      id: form.get('id')?.value,
      inicio: form.get('inicio')?.value,
@@ -71,8 +146,14 @@ export class BanhoTosaFormComponent {
      observacao: form.get('observacao')?.value,
      animal: form.get('animal')?.value,
      tipoBanhoTosa: form.get('tipoBanhoTosa')?.value,
-     status: form.get('status')?.value
+     status: form.get('status')?.value,
+     statusPagamentoBanho: form.get('statusPagamentoBanho')?.value,
+     transporte: form.get('transporte')?.value,
+     buscar: form.get('buscar')?.value,
+     entregar: form.get('entregar')?.value,
+     desconto: form.get('desconto')?.value
     }
+
    if(form.valid){
      this.banhoTosaService.save(this.requisicao).pipe(
        take(1)
@@ -87,6 +168,7 @@ export class BanhoTosaFormComponent {
          },
      });
    }
+   form.reset();
  }
 
  public comboBox(){

@@ -1,4 +1,4 @@
-<div class="col-md-12" style="margin-top: 180px;">
+<div class="col-md-12" style="margin-top: 50px;">
   <nav>
     <ol class="breadcrumb bg-white">
       <li class="breadcrumb-item"><a routerLink="/">Início</a></li>
@@ -15,51 +15,92 @@
       <button routerLink="new" class="btn btn-primary float-right">
         <i class="fas fa-user-plus"></i> Cadastrar Humano
       </button>
+      <button class="btn btn-success float-right mr-1" (click)="fecharPesquisa()">🔎</button>
     </div>
   </div>
-  <div id="table" class="table-responsive">
-    <table class="table table-borderless">
-      <thead>
-        <tr class="bg-dark text-light">
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Sobrenome</th>
-          <th>Fone</th>
-          <th>Whatspp</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(lista of listaHumano; track lista.id; let i = $index){
-        <tr>
-          <td>{{ lista.id }}</td>
-          <td>{{ lista.nome }}</td>
-          <td>{{ lista.sobrenome}}</td>
-          <td>{{ lista.fone }}</td>
-          <td>{{ lista.whatsapp }}</td>
-          <td>{{ lista.status }}</td>
-          <td>
-            <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
-            @if(lista.id > 0){
-              <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
-            }
-
-          </td>
-        </tr>
-      } @empty {
-        <div class="d-flex justify-content-center mt-3 ml-5">
-          <div class="alert alert-warning" style="width: 800px;" role="alert">
-            A lista de Humanos esta vazia!
-          </div>
-        </div>
-      }
-      </tbody>
-    </table>
-  </div>
-    @if(humano){
-      <div>
-        <app-modal-form [entrada]="humano" (emitirEvento)="excluirRegistro($event)"/>
+  @if(ativaCampoPesquisa){
+    <div class="form-row col-md-12 d-flex justify-content-center">
+      <div class="form-group col-md-6">
+        <input
+          placeholder="Faça sua Pesquisa Aqui"
+          type="text"
+          class="form-control"
+          id="id"
+          [(ngModel)]="pesquisa"
+          (input)="pesquisarHumano()"
+          autocomplete="off"
+          />
       </div>
-    }
+    </div>
+  }
+  @defer (when carregando){
+    <div id="table" class="table-responsive">
+      <table class="table table-borderless">
+        <thead>
+          <tr class="bg-dark text-light">
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Fone/Fixo</th>
+            <th>Whatsapp/Cel.</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(lista of listaHumano; track lista.id; let i = $index){
+          <tr>
+            <td>{{ lista.id }}</td>
+            <td>{{ lista.nome }}</td>
+            <td>{{ lista.sobrenome }}</td>
+            <td><a [href]="'tel:+'+'lista.fone'">{{ lista.fone | mask:'(00) 0000-0000' }}</a></td>
+            <td>{{ lista.whatsapp | mask:'(00) 0 0000-0000' }}</td>
+            <td>{{ lista.status }}</td>
+            <td>
+              <button (click)="editar(lista.id)" class="btn btn-outline-info btn-sm"><i class="far fa-edit"></i></button>
+              @if(lista.id > 0){
+                <button (click)="recuperarDados(lista)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-user-slash"></i></button>
+              }
+
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  } @placeholder {
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary mt-4" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  } @loading {
+    <p>Carregando a Lista de Humanos...</p>
+  }
+  <form class="needs-validation" novalidate [formGroup]="paginaForm" style="margin-top: 15px;">
+    <div class="row col-12 d-flex justify-content-center align-items-center" style="font-size: 10pt;">
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Menor" class="btn btn-info" (click)="paginaMenor()">
+            <i class="fas fa-minus"></i> Anterior
+        </button>
+        <div class="form-group" style="margin-top: 15px; text-align: center; width: 120px;"><span>Pág. {{ pagina + 1}}  de {{ totalPages  }}</span></div>
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Maior" class="btn btn-info" (click)="paginaMaior()">
+          <i class="fas fa-plus"></i> Próximo
+        </button>
+        <div class="form-group ml-1" style="margin-top: 15px; text-align: center; width: 65px;">
+          <select class="form-control" id="pegaTamanho" name="quantPag" formControlName="quantPag" (change)="atualizaPagina()">
+              <option value=5>5</option>
+              <option value=10>10</option>
+              <option value=25>25</option>
+              <option value=50>50</option>
+          </select>
+        </div>
+      <span class="float-right ml-1">Total de registro: {{ totalElements }}</span>
+  </div>
+</form>
+
+  @if(humano){
+    <div>
+      <app-modal-form [entrada]="humano" (emitirEvento)="excluirRegistro($event)"/>
+    </div>
+  }
 </div>

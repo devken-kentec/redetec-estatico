@@ -33,7 +33,7 @@ export class TipoBanhoTosaFormComponent {
       id: [ null ],
       descricao: [''],
       valor:[''],
-      status: ['']
+      status: ['Ativo']
     });
     this.preencherFormulario();
   }
@@ -71,5 +71,6 @@ export class TipoBanhoTosaFormComponent {
          },
      });
    }
+   form.reset();
  }
 }
