@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import  packageJson  from '../../package.json';
-import { HomeComponent } from './modulos/home/home.component';
 
 import { LoginService } from './modulos/login/shared/login.service';
 import { LoginFormComponent } from './modulos/login/login-form/login-form.component';
@@ -10,7 +9,7 @@ import { LoginFormComponent } from './modulos/login/login-form/login-form.compon
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HomeComponent, RouterModule, LoginFormComponent],
+  imports: [CommonModule, RouterOutlet, RouterModule, LoginFormComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
