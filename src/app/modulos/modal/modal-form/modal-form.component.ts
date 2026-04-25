@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-modal-form',
-  standalone: true,
-  imports: [],
-  templateUrl: './modal-form.component.html',
-  styleUrl: './modal-form.component.css'
+    selector: 'app-modal-form',
+    standalone: true,
+    imports: [],
+    templateUrl: './modal-form.component.html',
+    styleUrl: './modal-form.component.css'
 })
 export class ModalFormComponent {
   @Input()

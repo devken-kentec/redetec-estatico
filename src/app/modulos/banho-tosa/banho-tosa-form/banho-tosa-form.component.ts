@@ -11,17 +11,17 @@ import { ComboBoxTipoBanhoTosa } from '../../../domain/tipo-banho-tosa.domain';
 
 
 @Component({
-  selector: 'app-banho-tosa-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  templateUrl: './banho-tosa-form.component.html',
-  styleUrl: './banho-tosa-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-banho-tosa-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: './banho-tosa-form.component.html',
+    styleUrl: './banho-tosa-form.component.css',
+    preserveWhitespaces: true
 })
 export class BanhoTosaFormComponent {
   private fb = inject(FormBuilder);

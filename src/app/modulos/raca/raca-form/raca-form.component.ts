@@ -10,17 +10,18 @@ import { SharedService } from '../../shared/shared.service';
 import { ToastrModule } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-raca-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    ToastrModule],
-  templateUrl: './raca-form.component.html',
-  styleUrl: './raca-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-raca-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        ToastrModule
+    ],
+    templateUrl: './raca-form.component.html',
+    styleUrl: './raca-form.component.css',
+    preserveWhitespaces: true
 })
 export class RacaFormComponent {
   private fb = inject(FormBuilder);

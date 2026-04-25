@@ -8,16 +8,17 @@ import { RequisicaoEmpresa, RespostaEmpresa } from '../../../domain/empresa.doma
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-empresa-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule],
-  templateUrl: './empresa-form.component.html',
-  styleUrl: './empresa-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-empresa-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: './empresa-form.component.html',
+    styleUrl: './empresa-form.component.css',
+    preserveWhitespaces: true
 })
 export class EmpresaFormComponent {
   private fb = inject(FormBuilder);

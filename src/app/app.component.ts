@@ -7,11 +7,11 @@ import { LoginService } from './modulos/login/shared/login.service';
 import { LoginFormComponent } from './modulos/login/login-form/login-form.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule, LoginFormComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    standalone: true,
+    imports: [CommonModule, RouterOutlet, RouterModule, LoginFormComponent],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   public appVersion!: string;

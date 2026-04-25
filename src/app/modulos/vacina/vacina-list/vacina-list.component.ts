@@ -7,11 +7,10 @@ import { RespostaVacina } from '../../../domain/vacina.domain';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-vacina-list',
-  standalone: true,
-  imports: [RouterModule, ModalFormComponent],
-  templateUrl: './vacina-list.component.html',
-  styleUrl: './vacina-list.component.css'
+    selector: 'app-vacina-list',
+    imports: [RouterModule, ModalFormComponent],
+    templateUrl: './vacina-list.component.html',
+    styleUrl: './vacina-list.component.css'
 })
 export class VacinaListComponent {
   private vacinaService = inject(VacinaService);

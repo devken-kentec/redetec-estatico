@@ -8,12 +8,12 @@ import { take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-tipo-vacina-form',
-  standalone: true,
-  imports: [RouterModule, CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './tipo-vacina-form.component.html',
-  styleUrl: './tipo-vacina-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-tipo-vacina-form',
+    standalone: true,
+    imports: [RouterModule, CommonModule, ReactiveFormsModule, FormsModule],
+    templateUrl: './tipo-vacina-form.component.html',
+    styleUrl: './tipo-vacina-form.component.css',
+    preserveWhitespaces: true
 })
 export class TipoVacinaFormComponent {
 

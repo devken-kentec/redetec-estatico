@@ -10,17 +10,17 @@ import { ComboBoxRaca } from '../../../domain/raca.domain';
 import { ComboBoxHumano } from '../../../domain/humano.domain';
 
 @Component({
-  selector: 'app-animal-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  templateUrl: './animal-form.component.html',
-  styleUrl: './animal-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-animal-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: './animal-form.component.html',
+    styleUrl: './animal-form.component.css',
+    preserveWhitespaces: true
 })
 export class AnimalFormComponent {
   private fb = inject(FormBuilder);

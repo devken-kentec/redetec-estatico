@@ -7,12 +7,13 @@ import { RespostaEmpresa } from '../../../domain/empresa.domain';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-empresa-list',
-  standalone: true,
-  imports: [RouterModule, ModalFormComponent],
-  templateUrl: './empresa-list.component.html',
-  styleUrl: './empresa-list.component.css',
-  preserveWhitespaces: true
+    selector: 'app-empresa-list',
+    standalone: true,
+    imports: [RouterModule, ModalFormComponent],
+    template: `<app-modal-form/>`,
+    templateUrl: './empresa-list.component.html',
+    styleUrl: './empresa-list.component.css',
+    preserveWhitespaces: true
 })
 export class EmpresaListComponent {
   private empresaService = inject(EmpresaService);

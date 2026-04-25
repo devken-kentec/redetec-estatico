@@ -9,16 +9,17 @@ import { take } from 'rxjs';
 import { RequisicaoAcesso, RespostaAcesso } from '../../../domain/acesso.domain';
 
 @Component({
-  selector: 'app-acesso-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule],
-  templateUrl: './acesso-form.component.html',
-  styleUrl: './acesso-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-acesso-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: './acesso-form.component.html',
+    styleUrl: './acesso-form.component.css',
+    preserveWhitespaces: true
 })
 export class AcessoFormComponent {
   private fb = inject(FormBuilder);

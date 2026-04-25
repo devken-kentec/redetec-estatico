@@ -5,11 +5,11 @@ import { RespostaBanho } from '../../../domain/banho.domain';
 import { SharedService } from '../../shared/shared.service';
 
 @Component({
-  selector: 'app-banho-tosa-status-list',
-  standalone: true,
-  imports: [],
-  templateUrl: './banho-tosa-status-list.component.html',
-  styleUrl: './banho-tosa-status-list.component.css'
+    selector: 'app-banho-tosa-status-list',
+    standalone: true,
+    imports: [],
+    templateUrl: './banho-tosa-status-list.component.html',
+    styleUrl: './banho-tosa-status-list.component.css'
 })
 export class BanhoTosaStatusListComponent {
 

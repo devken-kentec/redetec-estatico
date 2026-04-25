@@ -7,12 +7,12 @@ import { RespostaTipoBanhoTosa } from '../../../domain/tipo-banho-tosa.domain';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-tipo-banho-tosa-list',
-  standalone: true,
-  imports: [RouterModule, ModalFormComponent],
-  templateUrl: './tipo-banho-tosa-list.component.html',
-  styleUrl: './tipo-banho-tosa-list.component.css',
-  preserveWhitespaces: true
+    selector: 'app-tipo-banho-tosa-list',
+    standalone: true,
+    imports: [RouterModule, ModalFormComponent],
+    templateUrl: './tipo-banho-tosa-list.component.html',
+    styleUrl: './tipo-banho-tosa-list.component.css',
+    preserveWhitespaces: true
 })
 export class TipoBanhoTosaListComponent implements OnInit {
   private tipoBanhoTosaService = inject(TipoBanhoTosaService);

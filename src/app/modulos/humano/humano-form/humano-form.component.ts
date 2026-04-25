@@ -9,19 +9,18 @@ import { take } from 'rxjs';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
-  selector: 'app-humano-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgxMaskDirective,
-    NgxMaskPipe
-  ],
-  templateUrl: './humano-form.component.html',
-  styleUrl: './humano-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-humano-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgxMaskDirective
+    ],
+    templateUrl: './humano-form.component.html',
+    styleUrl: './humano-form.component.css',
+    preserveWhitespaces: true
 })
 export class HumanoFormComponent {
   private fb = inject(FormBuilder);

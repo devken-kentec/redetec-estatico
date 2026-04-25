@@ -7,12 +7,12 @@ import { take } from 'rxjs';
 import { ModalFormComponent } from '../../modal/modal-form/modal-form.component';
 
 @Component({
-  selector: 'app-tipo-vacina-list',
-  standalone: true,
-  imports: [RouterModule, ModalFormComponent],
-  templateUrl: './tipo-vacina-list.component.html',
-  styleUrl: './tipo-vacina-list.component.css',
-  preserveWhitespaces: true
+    selector: 'app-tipo-vacina-list',
+    standalone: true,
+    imports: [RouterModule, ModalFormComponent],
+    templateUrl: './tipo-vacina-list.component.html',
+    styleUrl: './tipo-vacina-list.component.css',
+    preserveWhitespaces: true
 })
 export class TipoVacinaListComponent {
   private tipoVacinaService = inject(TipoVacinaService);

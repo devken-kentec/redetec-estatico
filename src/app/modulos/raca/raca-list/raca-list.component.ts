@@ -8,12 +8,12 @@ import { take } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-raca-list',
-  standalone: true,
-  imports: [RouterModule, ModalFormComponent, ToastrModule],
-  templateUrl: './raca-list.component.html',
-  styleUrl: './raca-list.component.css',
-  preserveWhitespaces: true
+    selector: 'app-raca-list',
+    standalone: true,
+    imports: [RouterModule, ModalFormComponent, ToastrModule],
+    templateUrl: './raca-list.component.html',
+    styleUrl: './raca-list.component.css',
+    preserveWhitespaces: true
 })
 export class RacaListComponent implements OnInit {
   private racaService = inject(RacaService);

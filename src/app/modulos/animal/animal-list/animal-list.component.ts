@@ -9,19 +9,18 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-animal-list',
-  standalone: true,
-  imports: [
-    RouterModule,
-    ModalFormComponent,
-    NgxMaskDirective,
-    NgxMaskPipe,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  templateUrl: './animal-list.component.html',
-  styleUrl: './animal-list.component.css',
-  preserveWhitespaces: true
+    selector: 'app-animal-list',
+    standalone: true,
+    imports: [
+        RouterModule,
+        NgxMaskPipe,
+        ReactiveFormsModule,
+        FormsModule,
+        ModalFormComponent
+    ],
+    templateUrl: './animal-list.component.html',
+    styleUrl: './animal-list.component.css',
+    preserveWhitespaces: true
 })
 export class AnimalListComponent {
   private animalService = inject(AnimalService);

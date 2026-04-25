@@ -9,19 +9,18 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-humano-list',
-  standalone: true,
-  imports: [
-    RouterModule,
-    ModalFormComponent,
-    NgxMaskDirective,
-    NgxMaskPipe,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  templateUrl: './humano-list.component.html',
-  styleUrl: './humano-list.component.css',
-  preserveWhitespaces: true
+    selector: 'app-humano-list',
+    standalone: true,
+    imports: [
+        RouterModule,
+        ModalFormComponent,
+        NgxMaskPipe,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: './humano-list.component.html',
+    styleUrl: './humano-list.component.css',
+    preserveWhitespaces: true
 })
 export class HumanoListComponent {
   private humanoService = inject(HumanoService);

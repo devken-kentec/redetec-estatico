@@ -5,11 +5,11 @@ import { SharedService } from '../../shared/shared.service';
 import { RespostaAcesso } from '../../../domain/acesso.domain';
 
 @Component({
-  selector: 'app-acesso-list',
-  standalone: true,
-  imports: [RouterModule],
-  templateUrl: './acesso-list.component.html',
-  styleUrl: './acesso-list.component.css'
+    selector: 'app-acesso-list',
+    standalone: true,
+    imports: [RouterModule],
+    templateUrl: './acesso-list.component.html',
+    styleUrl: './acesso-list.component.css'
 })
 export class AcessoListComponent {
 

@@ -9,16 +9,16 @@ import { take } from 'rxjs';
 import { LoginService } from '../shared/login.service';
 
 @Component({
-  selector: 'app-login-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.css'
+    selector: 'app-login-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: './login-form.component.html',
+    styleUrl: './login-form.component.css'
 })
 export class LoginFormComponent {
   private fb = inject(FormBuilder);

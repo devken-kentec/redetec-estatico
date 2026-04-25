@@ -1,29 +1,26 @@
+import { ModalFormComponent } from './../../modal/modal-form/modal-form.component';
 import { Component, inject } from '@angular/core';
 import { BanhoTosaService } from '../shared/banho-tosa.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SharedService } from '../../shared/shared.service';
 import { RequisicaoBanho, RespostaBanho } from '../../../domain/banho.domain';
 import { take } from 'rxjs';
-import { ModalFormComponent } from '../../modal/modal-form/modal-form.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComboBoxAnimal } from '../../../domain/animal.domain';
 import { ComboBoxHumano } from '../../../domain/humano.domain';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { RespostaPaginacao } from '../../../domain/paginacao.domian';
 
 @Component({
-  selector: 'app-banho-tosa-list',
-  standalone: true,
-  imports: [
-      RouterModule,
-      ModalFormComponent,
-      ReactiveFormsModule,
-      FormsModule,
-      NgxMaskDirective,
-      NgxMaskPipe],
-  templateUrl: './banho-tosa-list.component.html',
-  styleUrl: './banho-tosa-list.component.css',
-  preserveWhitespaces: true
+    selector: 'app-banho-tosa-list',
+    standalone: true,
+    imports: [
+        RouterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        ModalFormComponent
+    ],
+    template: `<app-modal-form/>`,
+    styleUrls: ['./banho-tosa-list.component.css'],
+    preserveWhitespaces: true
 })
 export class BanhoTosaListComponent {
   private fb = inject(FormBuilder);

@@ -8,16 +8,17 @@ import { RequisicaoTipoBanhoTosa, RespostaTipoBanhoTosa } from '../../../domain/
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-tipo-banho-tosa-form',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule],
-  templateUrl: './tipo-banho-tosa-form.component.html',
-  styleUrl: './tipo-banho-tosa-form.component.css',
-  preserveWhitespaces: true
+    selector: 'app-tipo-banho-tosa-form',
+    standalone: true,
+    imports: [
+        RouterModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    templateUrl: './tipo-banho-tosa-form.component.html',
+    styleUrl: './tipo-banho-tosa-form.component.css',
+    preserveWhitespaces: true
 })
 export class TipoBanhoTosaFormComponent {
   private fb = inject(FormBuilder);
